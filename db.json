@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Serigiu Merticariu",
+      "email": "semerticariu@gmail.com",
+      "password": "parola",
+      "isAdmin": false,
+      "isCoach": true
+    },
+    {
+      "id": 2,
+      "name": "John Doe",
+      "email": "john@doe.com",
+      "password": "john",
+      "isAdmin": true
+    }
+  ],
+  "sportType": [
+    "Running",
+    "Cicling"
+  ],
+
+  "clubs": [
+    {
+        "id": 1,
+        "name": "club"
+    }
+  ],
+
+  "events": [
+    {
+      "id": 1,
+      "name": "event"
+    }
+  ],
+
+  "workout": [
+    {
+      "id": 1,
+      "name": "workout"
+    }
+  ]
+}
