@@ -1,6 +1,7 @@
 import { Navbar } from '../Common/Navbar/Navbar';
 
 export const Clubs = () => {
+  const test = 0;
   return (
     <div>
       
