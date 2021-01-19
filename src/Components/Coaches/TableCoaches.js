@@ -1,17 +1,28 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import axios from 'axios';
+import { Modal } from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import './TableCoaches.css';
-const URL = 'http://localhost:3000/user'
-//const URL = '../db.json'
+import { FormCreateEdit } from '../Common/OpenForm/FormCreateEdit';
+const URL = 'http://localhost:3000/user';
 
 export const Table = () => {
     const [employees, setEmployees] = React.useState([]);
     const [searchedEmployees, setSearchedEmployees] = React.useState([]);
+    
+    const [show, setShow] = React.useState(false);
+    const [title, setTitle] = React.useState("");
+    const handleClose = () => setShow(false);
+    const handleShow = (type) =>{
+        
+        setTitle(type);
+        setShow(true);
+
+    } 
 
     React.useEffect(() => {
         getData();
     }, [])
-
     const getData = async () => {
 
         const response = await axios.get(URL)
@@ -27,7 +38,7 @@ export const Table = () => {
         })
     }
     const addData = () => {
-      var data = {
+        var data = {
             id: 4,
             name: "Admin John",
             email: "admin@gmail.com",
@@ -42,14 +53,14 @@ export const Table = () => {
             isAdmin: true,
             isCoach: false,
             isAthlete: false
-          }
-          axios.post(`${URL}`,data)
+        }
+        axios.post(`${URL}`, data)
 
-        
+
     }
     const putData = (id) => {
-        axios.patch(`${URL}/${id}`,{name : "Luciano"});      
-        
+        axios.patch(`${URL}/${id}`, { name: "Luciano" });
+
     }
     const renderHeader = () => {
         let headerElement = ['', 'First & Last Name', 'Email adress', 'Owned clubs', 'Actions']
@@ -59,13 +70,13 @@ export const Table = () => {
         })
     }
     const renderBody = () => {
-      
-        return searchedEmployees && searchedEmployees.map(({ id, name, email, phone } ) => {
+
+        return searchedEmployees && searchedEmployees.map(({ id, name, email, phone }) => {
             return (
-              
+
                 <tr key={id}>
                     <td className='selected'>
-                    <input type="checkbox" ></input>
+                        <input type="checkbox" ></input>
                     </td>
                     <td>{name}</td>
                     <td>{email}</td>
@@ -82,52 +93,75 @@ export const Table = () => {
         const searchedWord = e.target.value;
         console.log(searchedWord)
 
-        if(!searchedWord.length > 0) {
+        if (!searchedWord.length > 0) {
             setSearchedEmployees(employees);
         } else {
             let searched = searchedEmployees.filter(employee => employee.name.toLowerCase().includes(searchedWord.toLowerCase()));
             setSearchedEmployees(searched);
         }
-      
-    //   debugger
-          
-            
-      
+
+        //   debugger
+
+
+
     }
-    const handleOpenForm = (type,user) =>{
-//aici voi introduce o conditie pentru a schimba textul din label al formelor de adaugare/stergere
+    const handleOpenForm = (type, user) => {
+        //aici voi introduce o conditie pentru a schimba textul din label al formelor de adaugare/stergere
     }
+    // const contentAddCoach = ()=>{
+    //     return(
+    //         <div>
+
+    //         </div>
+    //     )
+    // }
     return (
         <Fragment>
-        <input id="searchInput" onChange={(e) => {search(e)}}></input>
-        <button className='button' onClick={() => handleOpenForm('create', employees)}>Add</button>{/*addData()*/}
-        <table id="coaches">
-            <thead>
-                <tr>{renderHeader()}</tr>
-            </thead>
-            <tbody>
-                {/* {renderBody()} */}
+            <input id="searchInput" onChange={(e) => { search(e) }}></input>
+            <button className='button' onClick={()=>{handleShow("Add Coach")}}>Add</button>
+            <table id="coaches">
+                <thead>
+                    <tr>{renderHeader()}</tr>
+                </thead>
+                <tbody>
+                    {/* {renderBody()} */}
 
-                {searchedEmployees && searchedEmployees.map((employee ) => {
-            return (
-              
-                <tr key={employee.id}>
-                    <td className='selected'>
-                    <input type="checkbox" ></input>
-                    </td>
-                    <td>{employee.name}</td>
-                    <td>{employee.email}</td>
-                    <td>{employee.phone}</td>
-                    <td className='actions'>
-                        <button className='button' onClick={() => removeData(employee.id)}>Delete</button>
-                        <button className='button' onClick={() => putData(employee.id)}>Edit</button>
-                    </td>
-                </tr>
-            )
-        })
-    }
-            </tbody>
-        </table>
+                    {searchedEmployees && searchedEmployees.map((employee) => {
+                        return (
+
+                            <tr key={employee.id}>
+                                <td className='selected'>
+                                    <input type="checkbox" ></input>
+                                </td>
+                                <td>{employee.name}</td>
+                                <td>{employee.email}</td>
+                                <td>{employee.phone}</td>
+                                <td className='actions'>
+                                    <button className='button' onClick={()=>{handleShow("Delete Coach")}}>Delete</button>
+                                    <button className='button' onClick={()=>{handleShow("Edit Coach")}}>Edit</button>
+                                </td>
+                            </tr>
+                        )
+                    })
+                    }
+                </tbody>
+            </table>
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title id="lblTitle">{title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <FormCreateEdit/>
+        </Modal.Body>
+        <Modal.Footer>
+        <Button id="btnCancel" variant="secondary" onClick={handleClose}>
+                        CANCEL
+                    </Button>
+                    <Button id="btnAdd" variant="primary" onClick={handleClose}>
+                        ADD
+                    </Button>
+        </Modal.Footer>
+      </Modal>
         </Fragment>
     )
 }

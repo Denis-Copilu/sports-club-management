@@ -52,29 +52,65 @@
   color: #000000;
   
     }
-  #btnSubmit{
-    align-items: center;
+  #btnAdd{
+    align-items:center;
     padding: 16px;
-    width: 100%;
+
     background: #1A1A1A;
     color: #44DABD;
     border-radius: 8px;
+
+    width: 140px;
+    height: 46px;
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
-  
-  .elementsLogin{
-    text-align: left;
-    align-items: center;
+  #lblCreateEdit{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: capitalize;
+    color: #000000;
+    
+      }
+  #drpDownClub{
+  background: #FFFFFF;
+  color: #8E9296;
+  border: 1px solid #8E9296;
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 100%;
   }
-  .row {
-    height: 100vh;
+  #btnCancel{
+    align-items:center;
+    padding: 16px;
+    width: auto;
+    background: #F5F5F7;
+    color: #1A1A1A;
+    border-radius: 8px;
+
+    width: 86px;
+    height: 46px;
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: none;
   }
   
   @media screen and (max-width: 425px) {
-    #hero-img {
-      display: none;
-    }
-  
-    .contentLog {
-      width: 100%;
-    }
+    
   }

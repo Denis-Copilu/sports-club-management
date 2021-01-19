@@ -8,7 +8,18 @@ body {
   padding: 0;
   color: #4d4d4d;
 }
+#lblTitle{
+  width: 189px;
+  height: 42px;
 
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 42px;
+  text-transform: capitalize;
+  color: #000000;
+}
 #coaches {
   /* border-collapse: collapse;
   border: 3px solid #ddd; */

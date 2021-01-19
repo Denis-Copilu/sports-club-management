@@ -12,7 +12,6 @@ import { Coaches } from './Components/Coaches/Coaches';
 import { Events } from './Components/Events/Events';
 import { Clubs } from './Components/Clubs/Clubs';
 import { Athletes } from './Components/Athletes/Athletes';
-import { TestWorkSpace } from './Components/TestWorkSpace';
 
 
 function App() {
@@ -29,7 +28,6 @@ function App() {
         <Route path="/events" component={Events} />
         <Route path="/clubs" component={Clubs} />
         <Route path="/athletes" component={Athletes} />
-        <Route path="/test" component={TestWorkSpace}/>
       </Switch> 
     </div>
   );
