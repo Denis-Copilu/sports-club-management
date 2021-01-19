@@ -6,9 +6,14 @@ import {
   Redirect
 } from "react-router-dom";
 
+//import { Login } from './Components/Login/Login';
 import { Login } from './Components/Login/Login';
+import { Coaches } from './Components/Coaches/Coaches';
 import { Events } from './Components/Events/Events';
 import { Clubs } from './Components/Clubs/Clubs';
+import { Athletes } from './Components/Athletes/Athletes';
+import { TestWorkSpace } from './Components/TestWorkSpace';
+
 
 function App() {
   const isLoggedIn = localStorage.getItem('isLoggedIn') == 'true';
@@ -20,8 +25,11 @@ function App() {
       <Switch>
         <Route path="/" component={Login} exact />
         <Route path="/login" component={Login} />
+        <Route path="/coaches" component={Coaches} />
         <Route path="/events" component={Events} />
         <Route path="/clubs" component={Clubs} />
+        <Route path="/athletes" component={Athletes} />
+        <Route path="/test" component={TestWorkSpace}/>
       </Switch> 
     </div>
   );

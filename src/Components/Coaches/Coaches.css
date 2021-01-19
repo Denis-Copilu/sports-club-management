@@ -1,0 +1,42 @@
+.navBar{
+    /* width: 15%;
+    height: 100vh; */
+  /* display: flex; */
+}
+.coachesPage{
+    width: 85%;
+    display: flex;
+    height: 100vh;
+    display: inline;
+    padding:5%;
+}
+.contentPage{
+    display: flex;
+    justify-content: center;
+    background-color: #F9F9F9;
+    width:100%;
+}
+#title{
+
+font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 36px;
+line-height: 42px;
+display: flex;
+align-items: center;
+text-align: left;
+text-transform: capitalize;
+color: #000000;
+}
+#searchInput{
+    max-width: 371px;
+    display: flex;
+}
+#table1{
+     /* height: 50%; 
+     width: 100%; */
+     padding-top: 3%;
+    
+    
+}

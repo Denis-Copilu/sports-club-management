@@ -1,0 +1,134 @@
+@import url('https://rsms.me/inter/inter.css');
+html { font-family: 'Inter', sans-serif; }
+.navBar {
+    width: 15%;
+    height: 100vh;   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1A1A1A;
+}
+.buttonsControl{
+    text-align: center;
+    align-items: center; 
+    
+}
+.navBarControls{
+    align-items: center;
+     
+}
+#name{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 32px;
+    color: white; 
+}
+#role{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8E9296;
+}
+#dst{
+    margin-bottom: 25px;
+}
+a:link, a:visited {
+    border-radius: 7px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    width: 200px;
+    height: 54px;
+    background:#1A1A1A;
+    color: #8E9296;
+    text-decoration: none;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  a:hover{
+    border-radius: 7px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    width: 200px;
+    height: 54px;
+    margin: auto;
+    background: #FFFFFF;
+    color: #1A1A1A;
+    transition: all 200ms ease-in;
+}
+#logoutBtn{
+    border-radius: 7px; 
+    border: none;
+    width: auto;
+    height: auto;
+    background:#1A1A1A;
+    color: #8E9296;
+    text-decoration: none;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top:100%;
+    
+  }
+#logoutBtn:hover{
+    width: auto;
+    height: auto;
+    background: #FFFFFF;
+    color: #1A1A1A;
+    transition: none;
+  }
+#coaches-icon {
+    background-image: url('../../../assets/Images/coaches.svg');
+    width: 24px;
+    height: 21px;
+    display:inline-block;
+    
+}
+
+#events-icon {
+    background-image: url('../../../assets/Images/events.svg'); 
+    width: 24px;
+    height: 21px;
+    display:inline-block;
+    
+}
+#clubs-icon{
+    background-image: url('../../../assets/Images/clubs.svg');
+    width: 24px;
+    height: 21px;
+    display:inline-block;
+}
+#athletes-icon{
+    background-image: url('../../../assets/Images/athletes.svg');
+    width: 24px;
+    height: 21px;
+    display:inline-block;
+}
+#logout-icon{
+    background-image: url('../../../assets/Images/logout.svg');
+    width: 24px;
+    height: 21px;
+    display:inline-block;
+}
+.buttonsControl{
+    padding-top: 80%;
+    width: 100%;
+    align-items: center;
+}
+.userContent{
+    padding-top: 20%;
+    padding-bottom: 30%;
+    align-items: center;  
+}

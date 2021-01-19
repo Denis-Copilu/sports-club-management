@@ -11,10 +11,11 @@
       "height": 170,
       "weight": 90,
       "age": 25,
-      "profile_photo": " ",
+      "profile_photo":" ",
       "isAdmin": true,
       "isCoach": false,
       "isAthlete": false
+      
     },
     {
       "id": 2,
@@ -28,52 +29,57 @@
       "height": 170,
       "weight": 80,
       "age": 21,
-      "profile_photo": " ",
+      "profile_photo":" ",
       "isAdmin": false,
       "isCoach": true,
       "isAthlete": false
     },
     {
-      "id": 4,
-      "name": "Luciano",
-      "email": "admin@gmail.com",
+      "id": 3,
+      "name": "Athlete John",
+      "email": "athlete@gmail.com",
       "password": "parola",
+      "role_id": 3,
       "gender": "male",
-      "primary_sport_id": 0,
-      "secondary_sport_id": 0,
-      "height": 170,
-      "weight": 90,
-      "age": 25,
-      "profile_photo": " ",
-      "isAdmin": true,
+      "primary_sport_id": 1,
+      "secondary_sport_id": 3,
+      "height": 175,
+      "weight": 75,
+      "age": 20,
+      "profile_photo":" ",
+      "isAdmin": false,
       "isCoach": false,
-      "isAthlete": false
+      "isAthlete": true
+      
     }
   ],
   "sport": [
-    {
-      "id": 1,
-      "type": "Running"
+    { 
+      "id":1,
+      "type":"Running"
     },
     {
-      "id": 2,
-      "type": "Cicling"
+      "id":2,
+      "type":"Cicling"
     },
     {
-      "id": 3,
-      "type": "Rugby"
+      "id":3,
+      "type":"Rugby"
     }
+    
   ],
+
   "club": [
     {
-      "id": 1,
-      "type": "Steaua"
+        "id": 1,
+        "type": "Steaua"
     },
     {
       "id": 2,
       "type": "CSM Suceava"
-    }
+  }
   ],
+
   "events": [
     {
       "id": 1,
@@ -86,6 +92,7 @@
       "sport_type_id": 3
     }
   ],
+
   "workout": [
     {
       "id": 1,

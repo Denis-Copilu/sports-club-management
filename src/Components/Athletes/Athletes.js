@@ -1,9 +1,9 @@
 import {Navbar} from "../Common/Navbar/Navbar";
-export const Events = () => {
+export const Athletes = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <p>Coaches</p>            
+      <p>Athletes</p>            
     </div>
     
   );
