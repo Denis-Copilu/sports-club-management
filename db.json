@@ -14,7 +14,8 @@
       "profile_photo": " ",
       "isAdmin": true,
       "isCoach": false,
-      "isAthlete": false
+      "isAthlete": false,
+      "clubs":["Runners,", "Vikings"]
     },
     {
       "id": 2,
@@ -31,10 +32,11 @@
       "profile_photo": " ",
       "isAdmin": false,
       "isCoach": true,
-      "isAthlete": false
+      "isAthlete": false,
+      "clubs":["Dinamo,", "CSM Bucuresti"]
     },
     {
-      "id": 4,
+      "id": 3,
       "name": "Luciano",
       "email": "admin@gmail.com",
       "password": "parola",
@@ -47,7 +49,8 @@
       "profile_photo": " ",
       "isAdmin": true,
       "isCoach": false,
-      "isAthlete": false
+      "isAthlete": false,
+      "clubs":["Steaua,", "CSM Suceava"]
     }
   ],
   "sport": [

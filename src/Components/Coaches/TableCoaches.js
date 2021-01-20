@@ -1,22 +1,37 @@
 import React, { Fragment } from 'react';
 import axios from 'axios';
-import { Modal } from 'react-bootstrap';
+import { Modal, Form } from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 import './TableCoaches.css';
 import { FormCreateEdit } from '../Common/OpenForm/FormCreateEdit';
+import { FormDelete } from '../Common/OpenForm/FormDelete';
 const URL = 'http://localhost:3000/user';
 
 export const Table = () => {
     const [employees, setEmployees] = React.useState([]);
     const [searchedEmployees, setSearchedEmployees] = React.useState([]);
+    //const [clubs, setClubs] = React.useState([]);
     
-    const [show, setShow] = React.useState(false);
+    const [showEA, setShowEA] = React.useState(false);
+    const [showDel, setShowDel] = React.useState(false);
     const [title, setTitle] = React.useState("");
-    const handleClose = () => setShow(false);
-    const handleShow = (type) =>{
-        
-        setTitle(type);
-        setShow(true);
+    const [type, setType] = React.useState("");
+    const [name, setName] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    
+    const handleCloseEA = () => setShowEA(false);
+    const handleShowEA = (type,employee) =>{
+        setTitle(type + " Coach"); 
+        setName(employee.name);
+        setEmail(employee.email);     
+        setShowEA(true); 
+
+    } 
+    const handleCloseDel = () => setShowDel(false);
+    const handleShowDel = (employee) =>{
+        setName(employee.name);
+        setTitle("Delete Coach");   
+        setShowDel(true); 
 
     } 
 
@@ -28,6 +43,7 @@ export const Table = () => {
         const response = await axios.get(URL)
         setEmployees(response.data);
         setSearchedEmployees(response.data)
+        //console.log(response.data.clubs);
     }
     const removeData = (id) => {
 
@@ -58,8 +74,8 @@ export const Table = () => {
 
 
     }
-    const putData = (id) => {
-        axios.patch(`${URL}/${id}`, { name: "Luciano" });
+    const putData = (id, _name, _email) => {
+        axios.patch(`${URL}/${id}`, { name: _name, _email });
 
     }
     const renderHeader = () => {
@@ -71,7 +87,7 @@ export const Table = () => {
     }
     const renderBody = () => {
 
-        return searchedEmployees && searchedEmployees.map(({ id, name, email, phone }) => {
+        return searchedEmployees && searchedEmployees.map(({ id, name, email, clubs }) => {
             return (
 
                 <tr key={id}>
@@ -80,7 +96,7 @@ export const Table = () => {
                     </td>
                     <td>{name}</td>
                     <td>{email}</td>
-                    <td>{phone}</td>
+                    <td>{clubs}</td>
                     <td className='actions'>
                         <button className='button' onClick={() => removeData(id)}>Delete</button>
                         <button className='button' onClick={() => putData(id)}>Edit</button>
@@ -99,26 +115,13 @@ export const Table = () => {
             let searched = searchedEmployees.filter(employee => employee.name.toLowerCase().includes(searchedWord.toLowerCase()));
             setSearchedEmployees(searched);
         }
-
-        //   debugger
-
-
-
     }
-    const handleOpenForm = (type, user) => {
-        //aici voi introduce o conditie pentru a schimba textul din label al formelor de adaugare/stergere
-    }
-    // const contentAddCoach = ()=>{
-    //     return(
-    //         <div>
-
-    //         </div>
-    //     )
-    // }
     return (
         <Fragment>
+           <div id ="btn-input">
             <input id="searchInput" onChange={(e) => { search(e) }}></input>
-            <button className='button' onClick={()=>{handleShow("Add Coach")}}>Add</button>
+            <button id='btnAdd1' onClick={()=>{handleShowEA("Add",employees);setType("add");}}>Add</button>
+           </div>
             <table id="coaches">
                 <thead>
                     <tr>{renderHeader()}</tr>
@@ -135,10 +138,10 @@ export const Table = () => {
                                 </td>
                                 <td>{employee.name}</td>
                                 <td>{employee.email}</td>
-                                <td>{employee.phone}</td>
+                                <td>{employee.clubs}</td>
                                 <td className='actions'>
-                                    <button className='button' onClick={()=>{handleShow("Delete Coach")}}>Delete</button>
-                                    <button className='button' onClick={()=>{handleShow("Edit Coach")}}>Edit</button>
+                                    <button id="btnEdit" onClick={()=>{handleShowEA("Edit",employee);setType("edit");}}><div id="edit-icon"></div></button>
+                                    <button id="btnDelete" onClick={()=>{handleCloseEA(); handleShowDel(employee)}}><div id="delete-icon"></div></button>                                   
                                 </td>
                             </tr>
                         )
@@ -146,25 +149,41 @@ export const Table = () => {
                     }
                 </tbody>
             </table>
-      <Modal show={show} onHide={handleClose} animation={false}>
+      <Modal show={showEA} onHide={handleCloseEA} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title id="lblTitle">{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <FormCreateEdit/>
+        <FormCreateEdit name = {name} email = {email} formType={type}/>
         </Modal.Body>
         <Modal.Footer>
-        <Button id="btnCancel" variant="secondary" onClick={handleClose}>
+        <Button id="btnCancel" variant="secondary" onClick={handleCloseEA}>
                         CANCEL
                     </Button>
-                    <Button id="btnAdd" variant="primary" onClick={handleClose}>
+        <Button id="btnAdd" variant="primary" onClick={handleCloseEA}>
                         ADD
+                    </Button>
+        </Modal.Footer>
+        {/* --------------------DELETE MODAL----------------------- */}
+      </Modal>
+      <Modal show={showDel} onHide={handleCloseDel} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title id="lblTitle">{title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+       <FormDelete name = {name}/>
+
+        </Modal.Body>
+        <Modal.Footer>
+        <Button id="btnCancel" variant="secondary" onClick={handleCloseDel}>
+                        CANCEL
+                    </Button>
+        <Button id="btnAdd" variant="primary" onClick={handleCloseDel}>
+                        DELETE
                     </Button>
         </Modal.Footer>
       </Modal>
         </Fragment>
     )
 }
-
-
-// ReactDOM.render(<Table />, document.getElementById('root'));

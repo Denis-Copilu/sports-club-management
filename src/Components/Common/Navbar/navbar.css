@@ -122,6 +122,22 @@ a:link, a:visited {
     height: 21px;
     display:inline-block;
 }
+#delete-icon {
+    background-image: url('../../../assets/Images/delete.svg');
+    width: 24px;
+    height: 21px;
+    background-color: #F9F9F9;   
+    display:inline-block;
+    
+}
+#edit-icon {
+    background-image: url('../../../assets/Images/edit.svg');
+    width: 24px;
+    height: 21px;
+    background-color: #F9F9F9;
+    display:inline-block;
+    
+}
 .buttonsControl{
     padding-top: 80%;
     width: 100%;
