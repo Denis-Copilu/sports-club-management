@@ -2,7 +2,7 @@
   "user": [
     {
       "id": 1,
-      "name": "Admin John",
+      "name": "Admin Johnas",
       "email": "admin@gmail.com",
       "password": "parola",
       "gender": "male",
@@ -15,7 +15,10 @@
       "isAdmin": true,
       "isCoach": false,
       "isAthlete": false,
-      "clubs":["Runners,", "Vikings"]
+      "clubs": [
+        "Runners ",
+        " Vikings"
+      ]
     },
     {
       "id": 2,
@@ -33,11 +36,14 @@
       "isAdmin": false,
       "isCoach": true,
       "isAthlete": false,
-      "clubs":["Dinamo,", "CSM Bucuresti"]
+      "clubs": [
+        "Dinamo ",
+        " CSM Bucuresti"
+      ]
     },
     {
       "id": 3,
-      "name": "Luciano",
+      "name": "Luciano ",
       "email": "admin@gmail.com",
       "password": "parola",
       "gender": "male",
@@ -50,7 +56,10 @@
       "isAdmin": true,
       "isCoach": false,
       "isAthlete": false,
-      "clubs":["Steaua,", "CSM Suceava"]
+      "clubs": [
+        "Steaua ",
+        " CSM Suceava"
+      ]
     }
   ],
   "sport": [
@@ -67,14 +76,30 @@
       "type": "Rugby"
     }
   ],
-  "club": [
+  "clubs": [
     {
       "id": 1,
-      "type": "Steaua"
+      "name": "Steaua"
     },
     {
       "id": 2,
-      "type": "CSM Suceava"
+      "name": "CSM Suceava"
+    },
+    {
+      "id": 3,
+      "name": "Runners"
+    },
+    {
+      "id": 4,
+      "name": "Vikings"
+    },
+    {
+      "id": 5,
+      "name": "Dinamo"
+    },
+    {
+      "id": 6,
+      "name": "CSM Bucuresti"
     }
   ],
   "events": [

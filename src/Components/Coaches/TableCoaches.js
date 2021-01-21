@@ -6,27 +6,32 @@ import './TableCoaches.css';
 import { FormCreateEdit } from '../Common/OpenForm/FormCreateEdit';
 import { FormDelete } from '../Common/OpenForm/FormDelete';
 const URL = 'http://localhost:3000/user';
-
+const URLClubs = 'http://localhost:3000/clubs';
 export const Table = () => {
     const [employees, setEmployees] = React.useState([]);
     const [searchedEmployees, setSearchedEmployees] = React.useState([]);
-    //const [clubs, setClubs] = React.useState([]);
+    const [clubs, setClubs] = React.useState([]);
     
     const [showEA, setShowEA] = React.useState(false);
     const [showDel, setShowDel] = React.useState(false);
     const [title, setTitle] = React.useState("");
     const [type, setType] = React.useState("");
     const [name, setName] = React.useState("");
-    const [email, setEmail] = React.useState("");
-    
-    const handleCloseEA = () => setShowEA(false);
-    const handleShowEA = (type,employee) =>{
-        setTitle(type + " Coach"); 
-        setName(employee.name);
-        setEmail(employee.email);     
-        setShowEA(true); 
+    // const [email, setEmail] = React.useState("");
 
+    const [employeeToEdit, setEmployeeToEdit] = React.useState({});
+    const handleCloseEA = () => 
+    {
+        setShowEA(false);
+    }
+    const handleShowEA = (type, employee = {}) =>{
+        setTitle(type + " Coach"); 
+        setShowEA(true);
+        if(employee) {
+            setEmployeeToEdit(employee);
+        }  
     } 
+
     const handleCloseDel = () => setShowDel(false);
     const handleShowDel = (employee) =>{
         setName(employee.name);
@@ -38,6 +43,20 @@ export const Table = () => {
     React.useEffect(() => {
         getData();
     }, [])
+    /////////////////////////////////////////
+    const getClubs = async () => {
+
+        const response = await axios.get(URLClubs);
+        setClubs(response.data);
+        console.log(response.data);
+        // setEmployees(response.data);
+        // setSearchedEmployees(response.data)
+        //console.log(response.data.clubs);
+    }
+    React.useEffect(() => {
+        getClubs();
+    }, [])
+    ///////////////////////////////////
     const getData = async () => {
 
         const response = await axios.get(URL)
@@ -74,12 +93,13 @@ export const Table = () => {
 
 
     }
-    const putData = (id, _name, _email) => {
-        axios.patch(`${URL}/${id}`, { name: _name, _email });
+    const editData = (id, firstName, lastName, email) => {
+        console.log(id+firstName+lastName+email);
+        axios.patch(`${URL}/${id}`, { name: firstName+" "+lastName, email: email });
 
     }
     const renderHeader = () => {
-        let headerElement = ['', 'First & Last Name', 'Email adress', 'Owned clubs', 'Actions']
+        let headerElement = [<input type="checkbox" ></input>, 'First & Last Name', 'Email adress', 'Owned clubs', 'Actions']
 
         return headerElement.map((key, index) => {
             return <th key={index}>{key}</th>
@@ -87,23 +107,23 @@ export const Table = () => {
     }
     const renderBody = () => {
 
-        return searchedEmployees && searchedEmployees.map(({ id, name, email, clubs }) => {
-            return (
+        // return searchedEmployees && searchedEmployees.map(({ id, name, email, clubs }) => {
+        //     return (
 
-                <tr key={id}>
-                    <td className='selected'>
-                        <input type="checkbox" ></input>
-                    </td>
-                    <td>{name}</td>
-                    <td>{email}</td>
-                    <td>{clubs}</td>
-                    <td className='actions'>
-                        <button className='button' onClick={() => removeData(id)}>Delete</button>
-                        <button className='button' onClick={() => putData(id)}>Edit</button>
-                    </td>
-                </tr>
-            )
-        })
+        //         // <tr key={id}>
+        //         //     <td className='selected'>
+        //         //         <input type="checkbox" ></input>
+        //         //     </td>
+        //         //     <td>{name}</td>
+        //         //     <td>{email}</td>
+        //         //     <td>{clubs}</td>
+        //         //     <td className='actions'>
+        //         //         {/* <button className='button' onClick={() => removeData(id)}>Delete</button>
+        //         //         <button className='button' onClick={() => putData(id)}>Edit</button> */}
+        //         //     </td>
+        //         // </tr>
+        //     )
+        // })
     }
     const search = (e) => {
         const searchedWord = e.target.value;
@@ -120,7 +140,7 @@ export const Table = () => {
         <Fragment>
            <div id ="btn-input">
             <input id="searchInput" onChange={(e) => { search(e) }}></input>
-            <button id='btnAdd1' onClick={()=>{handleShowEA("Add",employees);setType("add");}}>Add</button>
+            <button id='btnAdd1' onClick={()=>{handleShowEA("Add");setType("add");}}>Add new</button>
            </div>
             <table id="coaches">
                 <thead>
@@ -140,7 +160,7 @@ export const Table = () => {
                                 <td>{employee.email}</td>
                                 <td>{employee.clubs}</td>
                                 <td className='actions'>
-                                    <button id="btnEdit" onClick={()=>{handleShowEA("Edit",employee);setType("edit");}}><div id="edit-icon"></div></button>
+                                    <button id="btnEdit" onClick={()=>{handleShowEA("Edit",employee); setType("edit");}}><div id="edit-icon"></div></button>
                                     <button id="btnDelete" onClick={()=>{handleCloseEA(); handleShowDel(employee)}}><div id="delete-icon"></div></button>                                   
                                 </td>
                             </tr>
@@ -154,15 +174,11 @@ export const Table = () => {
           <Modal.Title id="lblTitle">{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <FormCreateEdit name = {name} email = {email} formType={type}/>
+            <FormCreateEdit employee={employeeToEdit} clubs={clubs} formType={type} handleCloseEA={handleCloseEA} editData={editData}/>
         </Modal.Body>
         <Modal.Footer>
-        <Button id="btnCancel" variant="secondary" onClick={handleCloseEA}>
-                        CANCEL
-                    </Button>
-        <Button id="btnAdd" variant="primary" onClick={handleCloseEA}>
-                        ADD
-                    </Button>
+            {/* <Button id="btnCancel" variant="secondary" onClick={handleCloseEA}>CANCEL</Button>
+            <Button id="btnAdd" variant="primary" onClick={handleCloseEA}>ADD</Button> */}
         </Modal.Footer>
         {/* --------------------DELETE MODAL----------------------- */}
       </Modal>
