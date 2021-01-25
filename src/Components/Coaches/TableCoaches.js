@@ -17,7 +17,8 @@ export const Table = () => {
     const [title, setTitle] = React.useState("");
     const [type, setType] = React.useState("");
     const [name, setName] = React.useState("");
-    // const [email, setEmail] = React.useState("");
+    const [maxID, setMaxID] = React.useState();
+    //const [clubsOwned, setClubsOwned] = React.useState([]);
 
     const [employeeToEdit, setEmployeeToEdit] = React.useState({});
     const handleCloseEA = () => 
@@ -60,9 +61,11 @@ export const Table = () => {
     const getData = async () => {
 
         const response = await axios.get(URL)
+        
         setEmployees(response.data);
         setSearchedEmployees(response.data)
-        //console.log(response.data.clubs);
+        console.log(response.data[response.data.length-1].id);
+        setMaxID(response.data[response.data.length-1].id);
     }
     const removeData = (id) => {
 
@@ -72,11 +75,11 @@ export const Table = () => {
             setSearchedEmployees(del)
         })
     }
-    const addData = () => {
+    const createData = (firstName,lastName,email) => {
         var data = {
-            id: 4,
-            name: "Admin John",
-            email: "admin@gmail.com",
+            id: maxID+1,
+            name: firstName+" "+lastName,
+            email: email,
             password: "parola",
             gender: "male",
             primary_sport_id: 0,
@@ -89,14 +92,17 @@ export const Table = () => {
             isCoach: false,
             isAthlete: false
         }
-        axios.post(`${URL}`, data)
-
+        axios.post(`${URL}`, data).then(()=>{
+            handleCloseEA();
+        })
+        console.log(data);
 
     }
-    const editData = (id, firstName, lastName, email) => {
-        console.log(id+firstName+lastName+email);
-        axios.patch(`${URL}/${id}`, { name: firstName+" "+lastName, email: email });
-
+    const editData = (id, firstName, lastName, email,editedClubs) => {
+        console.log(editedClubs);
+        axios.patch(`${URL}/${id}`, { name: firstName+" "+lastName, email: email, clubs:editedClubs }).then(()=>{
+            handleCloseEA();
+        })
     }
     const renderHeader = () => {
         let headerElement = [<input type="checkbox" ></input>, 'First & Last Name', 'Email adress', 'Owned clubs', 'Actions']
@@ -174,7 +180,7 @@ export const Table = () => {
           <Modal.Title id="lblTitle">{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <FormCreateEdit employee={employeeToEdit} clubs={clubs} formType={type} handleCloseEA={handleCloseEA} editData={editData}/>
+            <FormCreateEdit employee={employeeToEdit} clubs={clubs} formType={type} handleCloseEA={handleCloseEA} handleShowDel={handleShowDel} editData={editData} createData={createData}/>
         </Modal.Body>
         <Modal.Footer>
             {/* <Button id="btnCancel" variant="secondary" onClick={handleCloseEA}>CANCEL</Button>

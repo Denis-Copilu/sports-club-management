@@ -2,8 +2,8 @@
   "user": [
     {
       "id": 1,
-      "name": "Admin Johnas",
-      "email": "admin@gmail.com",
+      "name": "Admin Johnase",
+      "email": "admin@gmail.come",
       "password": "parola",
       "gender": "male",
       "primary_sport_id": 0,
@@ -60,6 +60,38 @@
         "Steaua ",
         " CSM Suceava"
       ]
+    },
+    {
+      "id": 4,
+      "name": "Gica Hagi",
+      "email": "gicahagi@gmail.com",
+      "password": "parola",
+      "gender": "male",
+      "primary_sport_id": 0,
+      "secondary_sport_id": 0,
+      "height": 170,
+      "weight": 90,
+      "age": 25,
+      "profile_photo": " ",
+      "isAdmin": true,
+      "isCoach": false,
+      "isAthlete": false
+    },
+    {
+      "id": 5,
+      "name": "Marcel Popescu",
+      "email": "marcel@gmail.com",
+      "password": "parola",
+      "gender": "male",
+      "primary_sport_id": 0,
+      "secondary_sport_id": 0,
+      "height": 170,
+      "weight": 90,
+      "age": 25,
+      "profile_photo": " ",
+      "isAdmin": true,
+      "isCoach": false,
+      "isAthlete": false
     }
   ],
   "sport": [
