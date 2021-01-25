@@ -60,7 +60,7 @@ export const FormCreateEdit = ({ employee, formType, handleCloseEA, handleShowDe
                         }
                         </select>
                     </div>
-                    }
+                    
                     
                     {/* <Dropdown 
                     className="drop-down"
