@@ -2,16 +2,22 @@
 
 body {
   font-family: Inter,"Quicksand", sans-serif;
-  
-  /* display: flex;
-  justify-content: center; */
   padding: 0;
   color: #4d4d4d;
 }
+#lblTitle{
+  width: 250px;
+  height: 42px;
 
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 42px;
+  text-transform: capitalize;
+  color: #000000;
+}
 #coaches {
-  /* border-collapse: collapse;
-  border: 3px solid #ddd; */
     height: 50%; 
     width: 100%;
    padding-top: 3%;
@@ -50,7 +56,53 @@ body {
   border: 1px solid #f44336;
   background-color: transparent;
 }
-
 .button:active {
   border: 1px solid blue;
+}
+#btnEdit
+{
+  border: none;
+  background-color: #F9F9F9;
+  margin-right: 20%;
+}
+#btnDelete
+{
+  border: none;
+  background-color: #F9F9F9;
+  
+}
+#btn-input{
+
+  /* max-height: 40px; */
+  margin-bottom: 2%;
+  
+}
+#searchInput{
+  display:inline-flex;
+  align-items:flex-end;
+  border-radius: 8px;
+  width: 371px;
+  height: 46px;
+   margin-right: 50%; 
+  
+}
+#btnAdd1{
+  display:inline-flex;
+  align-items:flex-start;
+  padding: 16px;
+  display: inline-flex;
+  background: #1A1A1A;
+  color: #44DABD;
+  border-radius: 8px;
+
+  width: 177px;
+  height: 46px;
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }

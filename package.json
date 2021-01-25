@@ -11,11 +11,17 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "json-server": "^0.16.3",
+    "mdbreact": "^5.0.1",
     "react": "^17.0.1",
     "react-bootstrap-validation": "^0.1.11",
     "react-dom": "^17.0.1",
+    "react-dropdown": "^1.9.1",
+    "react-modal": "^3.12.1",
+    "react-multiselect-checkboxes": "^0.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.3",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

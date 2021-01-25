@@ -2,7 +2,7 @@
   "user": [
     {
       "id": 1,
-      "name": "Admin John",
+      "name": "Admin Johnas",
       "email": "admin@gmail.com",
       "password": "parola",
       "gender": "male",
@@ -14,7 +14,11 @@
       "profile_photo": " ",
       "isAdmin": true,
       "isCoach": false,
-      "isAthlete": false
+      "isAthlete": false,
+      "clubs": [
+        "CSM Suceava",
+        "Steaua"
+      ]
     },
     {
       "id": 2,
@@ -31,12 +35,16 @@
       "profile_photo": " ",
       "isAdmin": false,
       "isCoach": true,
-      "isAthlete": false
+      "isAthlete": false,
+      "clubs": [
+        "CSM Bucuresti",
+        "Dinamo"
+      ]
     },
     {
       "id": 4,
-      "name": "Luciano",
-      "email": "admin@gmail.com",
+      "name": "Gica Hagi",
+      "email": "gicahagi@gmail.com",
       "password": "parola",
       "gender": "male",
       "primary_sport_id": 0,
@@ -47,7 +55,28 @@
       "profile_photo": " ",
       "isAdmin": true,
       "isCoach": false,
-      "isAthlete": false
+      "isAthlete": false,
+      "clubs": [
+        "CSM Bucuresti",
+        "Steaua"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Marcel Popescu",
+      "email": "marcel@gmail.com",
+      "password": "parola",
+      "gender": "male",
+      "primary_sport_id": 0,
+      "secondary_sport_id": 0,
+      "height": 170,
+      "weight": 90,
+      "age": 25,
+      "profile_photo": " ",
+      "isAdmin": true,
+      "isCoach": false,
+      "isAthlete": false,
+      "clubs": "CSM Bucuresti"
     }
   ],
   "sport": [
@@ -64,14 +93,30 @@
       "type": "Rugby"
     }
   ],
-  "club": [
+  "clubs": [
     {
       "id": 1,
-      "type": "Steaua"
+      "name": "Steaua"
     },
     {
       "id": 2,
-      "type": "CSM Suceava"
+      "name": "CSM Suceava"
+    },
+    {
+      "id": 3,
+      "name": "Runners"
+    },
+    {
+      "id": 4,
+      "name": "Vikings"
+    },
+    {
+      "id": 5,
+      "name": "Dinamo"
+    },
+    {
+      "id": 6,
+      "name": "CSM Bucuresti"
     }
   ],
   "events": [

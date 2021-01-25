@@ -1,22 +1,61 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import axios from 'axios';
+import { Modal, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import './TableCoaches.css';
-const URL = 'http://localhost:3000/user'
-//const URL = '../db.json'
-
+import { FormCreateEdit } from '../Common/OpenForm/FormCreateEdit';
+import { FormDelete } from '../Common/OpenForm/FormDelete';
+const URL = 'http://localhost:3000/user';
+const URLClubs = 'http://localhost:3000/clubs';
 export const Table = () => {
     const [employees, setEmployees] = React.useState([]);
     const [searchedEmployees, setSearchedEmployees] = React.useState([]);
-
+    const [clubs, setClubs] = React.useState([]);
+    const [showEA, setShowEA] = React.useState(false);
+    const [showDel, setShowDel] = React.useState(false);
+    const [title, setTitle] = React.useState("");
+    const [type, setType] = React.useState("");
+    const [name, setName] = React.useState("");
+    const [idDel, setIdDel] = React.useState();
+    const [maxID, setMaxID] = React.useState();
+    const [employeeToEdit, setEmployeeToEdit] = React.useState({});
+    const handleCloseEA = () => {
+        setShowEA(false);
+    }
+    const handleShowEA = (type, employee = {}) => {
+        setTitle(type + " Coach");
+        setShowEA(true);
+        if (employee) {
+            setEmployeeToEdit(employee);
+        }
+    }
+    const handleCloseDel = () => setShowDel(false);
+    const handleShowDel = (employee) => {
+        setName(employee.name);
+        setIdDel(employee.id);
+        setTitle("Delete Coach");
+        setShowDel(true);
+    }
     React.useEffect(() => {
         getData();
     }, [])
+    const getClubs = async () => {
 
+        const response = await axios.get(URLClubs);
+        setClubs(response.data);
+        console.log(response.data);
+    }
+    React.useEffect(() => {
+        getClubs();
+    }, [])
     const getData = async () => {
 
         const response = await axios.get(URL)
+
         setEmployees(response.data);
         setSearchedEmployees(response.data)
+        console.log(response.data[response.data.length - 1].id);
+        setMaxID(response.data[response.data.length - 1].id);
     }
     const removeData = (id) => {
 
@@ -26,11 +65,11 @@ export const Table = () => {
             setSearchedEmployees(del)
         })
     }
-    const addData = () => {
-      var data = {
-            id: 4,
-            name: "Admin John",
-            email: "admin@gmail.com",
+    const createData = (firstName, lastName, email, editedClubs) => {
+        var data = {
+            id: maxID + 1,
+            name: firstName + " " + lastName,
+            email: email,
             password: "parola",
             gender: "male",
             primary_sport_id: 0,
@@ -41,96 +80,100 @@ export const Table = () => {
             profile_photo: " ",
             isAdmin: true,
             isCoach: false,
-            isAthlete: false
-          }
-          axios.post(`${URL}`,data)
+            isAthlete: false,
+            clubs: editedClubs
+        }
+        axios.post(`${URL}`, data).then(() => {
+            handleCloseEA();
+        })
+        console.log(data);
 
-        
     }
-    const putData = (id) => {
-        axios.patch(`${URL}/${id}`,{name : "Luciano"});      
-        
+    const editData = (id, firstName, lastName, email, editedClubs) => {
+        console.log(editedClubs);
+        axios.patch(`${URL}/${id}`, { name: firstName + " " + lastName, email: email, clubs: editedClubs }).then(() => {
+            handleCloseEA();
+        })
     }
     const renderHeader = () => {
-        let headerElement = ['', 'First & Last Name', 'Email adress', 'Owned clubs', 'Actions']
+        let headerElement = [<input type="checkbox" ></input>, 'First & Last Name', 'Email adress', 'Owned clubs', 'Actions']
 
         return headerElement.map((key, index) => {
             return <th key={index}>{key}</th>
-        })
-    }
-    const renderBody = () => {
-      
-        return searchedEmployees && searchedEmployees.map(({ id, name, email, phone } ) => {
-            return (
-              
-                <tr key={id}>
-                    <td className='selected'>
-                    <input type="checkbox" ></input>
-                    </td>
-                    <td>{name}</td>
-                    <td>{email}</td>
-                    <td>{phone}</td>
-                    <td className='actions'>
-                        <button className='button' onClick={() => removeData(id)}>Delete</button>
-                        <button className='button' onClick={() => putData(id)}>Edit</button>
-                    </td>
-                </tr>
-            )
         })
     }
     const search = (e) => {
         const searchedWord = e.target.value;
         console.log(searchedWord)
 
-        if(!searchedWord.length > 0) {
+        if (!searchedWord.length > 0) {
             setSearchedEmployees(employees);
         } else {
             let searched = searchedEmployees.filter(employee => employee.name.toLowerCase().includes(searchedWord.toLowerCase()));
             setSearchedEmployees(searched);
         }
-      
-    //   debugger
-          
-            
-      
-    }
-    const handleOpenForm = (type,user) =>{
-//aici voi introduce o conditie pentru a schimba textul din label al formelor de adaugare/stergere
     }
     return (
         <Fragment>
-        <input id="searchInput" onChange={(e) => {search(e)}}></input>
-        <button className='button' onClick={() => handleOpenForm('create', employees)}>Add</button>{/*addData()*/}
-        <table id="coaches">
-            <thead>
-                <tr>{renderHeader()}</tr>
-            </thead>
-            <tbody>
-                {/* {renderBody()} */}
+            <div id="btn-input">
+                <input id="searchInput" onChange={(e) => { search(e) }}></input>
+                <button id='btnAdd1' onClick={() => { handleShowEA("Add"); setType("add"); }}>Add new</button>
+            </div>
+            <table id="coaches">
+                <thead>
+                    <tr>{renderHeader()}</tr>
+                </thead>
+                <tbody>
+                    {searchedEmployees && searchedEmployees.map((employee) => {
+                        return (
 
-                {searchedEmployees && searchedEmployees.map((employee ) => {
-            return (
-              
-                <tr key={employee.id}>
-                    <td className='selected'>
-                    <input type="checkbox" ></input>
-                    </td>
-                    <td>{employee.name}</td>
-                    <td>{employee.email}</td>
-                    <td>{employee.phone}</td>
-                    <td className='actions'>
-                        <button className='button' onClick={() => removeData(employee.id)}>Delete</button>
-                        <button className='button' onClick={() => putData(employee.id)}>Edit</button>
-                    </td>
-                </tr>
-            )
-        })
-    }
-            </tbody>
-        </table>
+                            <tr key={employee.id}>
+                                <td className='selected'>
+                                    <input type="checkbox" ></input>
+                                </td>
+                                <td>{employee.name}</td>
+                                <td>{employee.email}</td>
+                                <td>{employee.clubs}</td>
+                                <td className='actions'>
+                                    <button id="btnEdit" onClick={() => { handleShowEA("Edit", employee); setType("edit"); }}><div id="edit-icon"></div></button>
+                                    <button id="btnDelete" onClick={() => { handleCloseEA(); handleShowDel(employee) }}><div id="delete-icon"></div></button>
+                                </td>
+                            </tr>
+                        )
+                    })
+                    }
+                </tbody>
+            </table>
+            <Modal show={showEA} onHide={handleCloseEA} animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title id="lblTitle">{title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <FormCreateEdit employee={employeeToEdit} clubs={clubs} formType={type} handleCloseEA={handleCloseEA} handleShowDel={handleShowDel} editData={editData} createData={createData} />
+                </Modal.Body>
+                <Modal.Footer>
+
+                </Modal.Footer>
+                {/* --------------------DELETE MODAL----------------------- */}
+            </Modal>
+            <Modal show={showDel} onHide={handleCloseDel} animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title id="lblTitle">{title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+
+                    <FormDelete name={name} />
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button id="btnCancel" variant="secondary" onClick={handleCloseDel}>
+                        CANCEL
+                    </Button>
+                    <Button id="btnAdd" variant="primary" onClick={() => { removeData(idDel); handleCloseDel(); }}>
+                        DELETE
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Fragment>
     )
 }
-
-
-// ReactDOM.render(<Table />, document.getElementById('root'));
