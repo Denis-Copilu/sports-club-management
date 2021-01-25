@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import axios from 'axios';
 import { Modal, Form } from 'react-bootstrap';
-import {Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import './TableCoaches.css';
 import { FormCreateEdit } from '../Common/OpenForm/FormCreateEdit';
 import { FormDelete } from '../Common/OpenForm/FormDelete';
@@ -11,63 +11,51 @@ export const Table = () => {
     const [employees, setEmployees] = React.useState([]);
     const [searchedEmployees, setSearchedEmployees] = React.useState([]);
     const [clubs, setClubs] = React.useState([]);
-    
     const [showEA, setShowEA] = React.useState(false);
     const [showDel, setShowDel] = React.useState(false);
     const [title, setTitle] = React.useState("");
     const [type, setType] = React.useState("");
     const [name, setName] = React.useState("");
-    const [idDel, setIdDel]=React.useState();
+    const [idDel, setIdDel] = React.useState();
     const [maxID, setMaxID] = React.useState();
-    //const [clubsOwned, setClubsOwned] = React.useState([]);
-
     const [employeeToEdit, setEmployeeToEdit] = React.useState({});
-    const handleCloseEA = () => 
-    {
+    const handleCloseEA = () => {
         setShowEA(false);
     }
-    const handleShowEA = (type, employee = {}) =>{
-        setTitle(type + " Coach"); 
+    const handleShowEA = (type, employee = {}) => {
+        setTitle(type + " Coach");
         setShowEA(true);
-        if(employee) {
+        if (employee) {
             setEmployeeToEdit(employee);
-        }  
-    } 
-
+        }
+    }
     const handleCloseDel = () => setShowDel(false);
-    const handleShowDel = (employee) =>{
+    const handleShowDel = (employee) => {
         setName(employee.name);
         setIdDel(employee.id);
-        setTitle("Delete Coach");   
-        setShowDel(true); 
-
-    } 
-
+        setTitle("Delete Coach");
+        setShowDel(true);
+    }
     React.useEffect(() => {
         getData();
     }, [])
-    /////////////////////////////////////////
     const getClubs = async () => {
 
         const response = await axios.get(URLClubs);
         setClubs(response.data);
         console.log(response.data);
-        // setEmployees(response.data);
-        // setSearchedEmployees(response.data)
-        //console.log(response.data.clubs);
     }
     React.useEffect(() => {
         getClubs();
     }, [])
-    ///////////////////////////////////
     const getData = async () => {
 
         const response = await axios.get(URL)
-        
+
         setEmployees(response.data);
         setSearchedEmployees(response.data)
-        console.log(response.data[response.data.length-1].id);
-        setMaxID(response.data[response.data.length-1].id);
+        console.log(response.data[response.data.length - 1].id);
+        setMaxID(response.data[response.data.length - 1].id);
     }
     const removeData = (id) => {
 
@@ -77,10 +65,10 @@ export const Table = () => {
             setSearchedEmployees(del)
         })
     }
-    const createData = (firstName,lastName,email,editedClubs) => {
+    const createData = (firstName, lastName, email, editedClubs) => {
         var data = {
-            id: maxID+1,
-            name: firstName+" "+lastName,
+            id: maxID + 1,
+            name: firstName + " " + lastName,
             email: email,
             password: "parola",
             gender: "male",
@@ -95,15 +83,15 @@ export const Table = () => {
             isAthlete: false,
             clubs: editedClubs
         }
-        axios.post(`${URL}`, data).then(()=>{
+        axios.post(`${URL}`, data).then(() => {
             handleCloseEA();
         })
         console.log(data);
 
     }
-    const editData = (id, firstName, lastName, email,editedClubs) => {
+    const editData = (id, firstName, lastName, email, editedClubs) => {
         console.log(editedClubs);
-        axios.patch(`${URL}/${id}`, { name: firstName+" "+lastName, email: email, clubs:editedClubs }).then(()=>{
+        axios.patch(`${URL}/${id}`, { name: firstName + " " + lastName, email: email, clubs: editedClubs }).then(() => {
             handleCloseEA();
         })
     }
@@ -113,26 +101,6 @@ export const Table = () => {
         return headerElement.map((key, index) => {
             return <th key={index}>{key}</th>
         })
-    }
-    const renderBody = () => {
-
-        // return searchedEmployees && searchedEmployees.map(({ id, name, email, clubs }) => {
-        //     return (
-
-        //         // <tr key={id}>
-        //         //     <td className='selected'>
-        //         //         <input type="checkbox" ></input>
-        //         //     </td>
-        //         //     <td>{name}</td>
-        //         //     <td>{email}</td>
-        //         //     <td>{clubs}</td>
-        //         //     <td className='actions'>
-        //         //         {/* <button className='button' onClick={() => removeData(id)}>Delete</button>
-        //         //         <button className='button' onClick={() => putData(id)}>Edit</button> */}
-        //         //     </td>
-        //         // </tr>
-        //     )
-        // })
     }
     const search = (e) => {
         const searchedWord = e.target.value;
@@ -147,17 +115,15 @@ export const Table = () => {
     }
     return (
         <Fragment>
-           <div id ="btn-input">
-            <input id="searchInput" onChange={(e) => { search(e) }}></input>
-            <button id='btnAdd1' onClick={()=>{handleShowEA("Add");setType("add");}}>Add new</button>
-           </div>
+            <div id="btn-input">
+                <input id="searchInput" onChange={(e) => { search(e) }}></input>
+                <button id='btnAdd1' onClick={() => { handleShowEA("Add"); setType("add"); }}>Add new</button>
+            </div>
             <table id="coaches">
                 <thead>
                     <tr>{renderHeader()}</tr>
                 </thead>
                 <tbody>
-                    {/* {renderBody()} */}
-
                     {searchedEmployees && searchedEmployees.map((employee) => {
                         return (
 
@@ -169,8 +135,8 @@ export const Table = () => {
                                 <td>{employee.email}</td>
                                 <td>{employee.clubs}</td>
                                 <td className='actions'>
-                                    <button id="btnEdit" onClick={()=>{handleShowEA("Edit",employee); setType("edit");}}><div id="edit-icon"></div></button>
-                                    <button id="btnDelete" onClick={()=>{handleCloseEA(); handleShowDel(employee)}}><div id="delete-icon"></div></button>                                   
+                                    <button id="btnEdit" onClick={() => { handleShowEA("Edit", employee); setType("edit"); }}><div id="edit-icon"></div></button>
+                                    <button id="btnDelete" onClick={() => { handleCloseEA(); handleShowDel(employee) }}><div id="delete-icon"></div></button>
                                 </td>
                             </tr>
                         )
@@ -178,37 +144,36 @@ export const Table = () => {
                     }
                 </tbody>
             </table>
-      <Modal show={showEA} onHide={handleCloseEA} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title id="lblTitle">{title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            <FormCreateEdit employee={employeeToEdit} clubs={clubs} formType={type} handleCloseEA={handleCloseEA} handleShowDel={handleShowDel} editData={editData} createData={createData}/>
-        </Modal.Body>
-        <Modal.Footer>
-            {/* <Button id="btnCancel" variant="secondary" onClick={handleCloseEA}>CANCEL</Button>
-            <Button id="btnAdd" variant="primary" onClick={handleCloseEA}>ADD</Button> */}
-        </Modal.Footer>
-        {/* --------------------DELETE MODAL----------------------- */}
-      </Modal>
-      <Modal show={showDel} onHide={handleCloseDel} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title id="lblTitle">{title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+            <Modal show={showEA} onHide={handleCloseEA} animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title id="lblTitle">{title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <FormCreateEdit employee={employeeToEdit} clubs={clubs} formType={type} handleCloseEA={handleCloseEA} handleShowDel={handleShowDel} editData={editData} createData={createData} />
+                </Modal.Body>
+                <Modal.Footer>
 
-       <FormDelete name = {name}/>
+                </Modal.Footer>
+                {/* --------------------DELETE MODAL----------------------- */}
+            </Modal>
+            <Modal show={showDel} onHide={handleCloseDel} animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title id="lblTitle">{title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
 
-        </Modal.Body>
-        <Modal.Footer>
-        <Button id="btnCancel" variant="secondary" onClick={handleCloseDel}>
+                    <FormDelete name={name} />
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button id="btnCancel" variant="secondary" onClick={handleCloseDel}>
                         CANCEL
                     </Button>
-        <Button id="btnAdd" variant="primary" onClick={()=>{removeData(idDel); handleCloseDel();}}>
+                    <Button id="btnAdd" variant="primary" onClick={() => { removeData(idDel); handleCloseDel(); }}>
                         DELETE
                     </Button>
-        </Modal.Footer>
-      </Modal>
+                </Modal.Footer>
+            </Modal>
         </Fragment>
     )
 }
