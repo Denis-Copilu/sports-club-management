@@ -17,6 +17,7 @@ export const Table = () => {
     const [title, setTitle] = React.useState("");
     const [type, setType] = React.useState("");
     const [name, setName] = React.useState("");
+    const [idDel, setIdDel]=React.useState();
     const [maxID, setMaxID] = React.useState();
     //const [clubsOwned, setClubsOwned] = React.useState([]);
 
@@ -36,6 +37,7 @@ export const Table = () => {
     const handleCloseDel = () => setShowDel(false);
     const handleShowDel = (employee) =>{
         setName(employee.name);
+        setIdDel(employee.id);
         setTitle("Delete Coach");   
         setShowDel(true); 
 
@@ -75,7 +77,7 @@ export const Table = () => {
             setSearchedEmployees(del)
         })
     }
-    const createData = (firstName,lastName,email) => {
+    const createData = (firstName,lastName,email,editedClubs) => {
         var data = {
             id: maxID+1,
             name: firstName+" "+lastName,
@@ -90,7 +92,8 @@ export const Table = () => {
             profile_photo: " ",
             isAdmin: true,
             isCoach: false,
-            isAthlete: false
+            isAthlete: false,
+            clubs: editedClubs
         }
         axios.post(`${URL}`, data).then(()=>{
             handleCloseEA();
@@ -201,7 +204,7 @@ export const Table = () => {
         <Button id="btnCancel" variant="secondary" onClick={handleCloseDel}>
                         CANCEL
                     </Button>
-        <Button id="btnAdd" variant="primary" onClick={handleCloseDel}>
+        <Button id="btnAdd" variant="primary" onClick={()=>{removeData(idDel); handleCloseDel();}}>
                         DELETE
                     </Button>
         </Modal.Footer>

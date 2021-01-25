@@ -11,9 +11,11 @@ export const FormCreateEdit = ({ employee, formType, handleCloseEA, handleShowDe
     console.log(employee)
     let firstName = formType.toLowerCase() === 'edit' ? employee.name.split(' ')[0] : '';
     let lastName = formType.toLowerCase() === 'edit' && employee.name.split(' ')[1] ? employee.name.split(' ')[1] : ''; 
-    let { email, _clubs } = employee;
-    const[editedClubs,setEditedClubs] = React.useState([]);
-
+    let { email } = employee;
+    //const[editedClubs,setEditedClubs] = React.useState([]);
+    let editedClubs = employee.clubs;
+    let _clubs = [];
+        
     //const [selected, setSelected] = React.useState([]);
     // const option = [
     //     { label: "Grapes 🍇", value: "grapes" },
@@ -46,12 +48,15 @@ export const FormCreateEdit = ({ employee, formType, handleCloseEA, handleShowDe
 
                 <Form.Group >
                     <Form.Label id="lblCreateEdit">Club Assign</Form.Label>
-                    {/* <Form.Control defaultValue={clubs} onKeyUp={(e)=>{clubs=e.target.value}} type="text" placeholder="Enter club assign" /> */}
-                    { 
                     <div>
-                        <select onChange={(e)=>{setEditedClubs(e.target.value); console.log(e.target.value);}} name='clubs' className="browser-default custom-select" multiple>
+                        <select onChange={(e)=>{
+                            _clubs.push(e.target.value);
+                            editedClubs = _clubs.filter(function(elem, pos) {
+                                return _clubs.indexOf(elem) == pos;
+                        });
+                            }} name='clubs' className="browser-default custom-select" multiple>
                         {
-                        clubs.map((club)=>{return(<option value={club.id}>{club.name}</option>)})
+                        clubs.map((club)=>{return(<option value={club.name}>{club.name}</option>)})
                         }
                         </select>
                     </div>
@@ -66,13 +71,13 @@ export const FormCreateEdit = ({ employee, formType, handleCloseEA, handleShowDe
                     multiple
                     options={option}
                     /> */}
-                    <MultiSelect options={clubs} employee={employee} /> 
+                    {/* <MultiSelect options={clubs} employee={employee} setEditedClubs={setEditedClubs}/>  */}
                 </Form.Group>
                 {formType.toLowerCase() === 'edit'?<Button id="btnCancel" variant="secondary" onClick={()=>{handleCloseEA();handleShowDel(employee);}}>DELETE</Button>:null}
                 <Button id="btnCancel" variant="secondary" onClick={handleCloseEA}>CANCEL</Button>
                 <Button id="btnAdd" variant="primary" onClick={()=>{
                     
-                    formType.toLowerCase() === 'edit' ? editData(employee.id, firstName, lastName, email):createData(firstName,lastName,email)
+                    formType.toLowerCase() === 'edit' ? editData(employee.id, firstName, lastName, email, editedClubs):createData(firstName,lastName,email,editedClubs)
                 }}>{formType.toLowerCase() === 'add'?'ADD':'EDIT'}</Button>
 
             </Form>

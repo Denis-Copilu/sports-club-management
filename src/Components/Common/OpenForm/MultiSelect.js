@@ -25,8 +25,8 @@ const MultiSelect = (options,employee, setClubsOwned) => {
         } else {
           this.setState(value);
         //   debugger
-          console.log(value);
-          setClubsOwned(value);
+          
+          // setClubsOwned(value);
         }
       }
     return <ReactMultiSelectCheckboxes width='100%' placeholderButtonLabel="Clubs" options={opt} value={selectedOptions} onChange={onChange}  setState={setSelectedOptions} /> //value={selectedOptions} onChange={onChange}  setState={setSelectedOptions}

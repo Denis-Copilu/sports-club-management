@@ -2,8 +2,8 @@
   "user": [
     {
       "id": 1,
-      "name": "Admin Johnase",
-      "email": "admin@gmail.come",
+      "name": "Admin Johnas",
+      "email": "admin@gmail.com",
       "password": "parola",
       "gender": "male",
       "primary_sport_id": 0,
@@ -16,8 +16,8 @@
       "isCoach": false,
       "isAthlete": false,
       "clubs": [
-        "Runners ",
-        " Vikings"
+        "CSM Suceava",
+        "Steaua"
       ]
     },
     {
@@ -37,28 +37,8 @@
       "isCoach": true,
       "isAthlete": false,
       "clubs": [
-        "Dinamo ",
-        " CSM Bucuresti"
-      ]
-    },
-    {
-      "id": 3,
-      "name": "Luciano ",
-      "email": "admin@gmail.com",
-      "password": "parola",
-      "gender": "male",
-      "primary_sport_id": 0,
-      "secondary_sport_id": 0,
-      "height": 170,
-      "weight": 90,
-      "age": 25,
-      "profile_photo": " ",
-      "isAdmin": true,
-      "isCoach": false,
-      "isAthlete": false,
-      "clubs": [
-        "Steaua ",
-        " CSM Suceava"
+        "CSM Bucuresti",
+        "Dinamo"
       ]
     },
     {
@@ -75,7 +55,11 @@
       "profile_photo": " ",
       "isAdmin": true,
       "isCoach": false,
-      "isAthlete": false
+      "isAthlete": false,
+      "clubs": [
+        "CSM Bucuresti",
+        "Steaua"
+      ]
     },
     {
       "id": 5,
@@ -91,7 +75,8 @@
       "profile_photo": " ",
       "isAdmin": true,
       "isCoach": false,
-      "isAthlete": false
+      "isAthlete": false,
+      "clubs": "CSM Bucuresti"
     }
   ],
   "sport": [
