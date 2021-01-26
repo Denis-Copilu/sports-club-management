@@ -1,10 +1,7 @@
-import axios from 'axios';
 import React from 'react';
-import { Row, Col, Button, Form } from 'react-bootstrap';
-import { Dropdown } from 'semantic-ui-react';
-import MultiSelect from './MultiSelect';
+import { Button, Form } from 'react-bootstrap';
 import 'semantic-ui-css/semantic.min.css';
-
+import Multiple from './MultiSelect';
 import './FormCreateEdit.css';
 const URL = 'http://localhost:3000/clubs';
 export const FormCreateEdit = ({ employee, formType, handleCloseEA, handleShowDel, editData, createData, clubs }) => {
@@ -12,9 +9,15 @@ export const FormCreateEdit = ({ employee, formType, handleCloseEA, handleShowDe
     let firstName = formType.toLowerCase() === 'edit' ? employee.name.split(' ')[0] : '';
     let lastName = formType.toLowerCase() === 'edit' && employee.name.split(' ')[1] ? employee.name.split(' ')[1] : '';
     let { email } = employee;
-    //const[editedClubs,setEditedClubs] = React.useState([]);
     let editedClubs = employee.clubs;
     let _clubs = [];
+    function setEditedClubs(nameClubs) {
+        nameClubs.map((club) => { _clubs.push(club.label); })
+        editedClubs = _clubs.filter(function (elem, pos) {
+            return _clubs.indexOf(elem) == pos;
+        });
+        console.log(editedClubs);
+    }
     return (
         <>
             <Form>
@@ -36,16 +39,7 @@ export const FormCreateEdit = ({ employee, formType, handleCloseEA, handleShowDe
                 <Form.Group >
                     <Form.Label id="lblCreateEdit">Club Assign</Form.Label>
                     <div>
-                        <select onChange={(e) => {
-                            _clubs.push(e.target.value);
-                            editedClubs = _clubs.filter(function (elem, pos) {
-                                return _clubs.indexOf(elem) == pos;
-                            });
-                        }} name='clubs' className="browser-default custom-select" multiple>
-                            {
-                                clubs.map((club) => { return (<option value={club.name}>{club.name}</option>) })
-                            }
-                        </select>
+                        <Multiple setEditedClubs={setEditedClubs} options={clubs} />
                     </div>
                 </Form.Group>
                 {formType.toLowerCase() === 'edit' ? <Button id="btnCancel" variant="secondary" onClick={() => { handleCloseEA(); handleShowDel(employee); }}>DELETE</Button> : null}

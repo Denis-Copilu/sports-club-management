@@ -125,6 +125,7 @@ export const Table = () => {
                 </thead>
                 <tbody>
                     {searchedEmployees && searchedEmployees.map((employee) => {
+                        
                         return (
 
                             <tr key={employee.id}>
