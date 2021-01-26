@@ -45,7 +45,6 @@ export const FormCreateEdit = ({ employee, formType, handleCloseEA, handleShowDe
                 {formType.toLowerCase() === 'edit' ? <Button id="btnCancel" variant="secondary" onClick={() => { handleCloseEA(); handleShowDel(employee); }}>DELETE</Button> : null}
                 <Button id="btnCancel" variant="secondary" onClick={handleCloseEA}>CANCEL</Button>
                 <Button id="btnAdd" variant="primary" onClick={() => {
-
                     formType.toLowerCase() === 'edit' ? editData(employee.id, firstName, lastName, email, editedClubs) : createData(firstName, lastName, email, editedClubs)
                 }}>{formType.toLowerCase() === 'add' ? 'ADD' : 'EDIT'}</Button>
 
