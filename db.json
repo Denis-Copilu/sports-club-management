@@ -2,8 +2,8 @@
   "user": [
     {
       "id": 1,
-      "name": "Admin Johnas",
-      "email": "admin@gmail.com",
+      "name": "Georgica Hagi",
+      "email": "gicahagi@gmail.com",
       "password": "parola",
       "gender": "male",
       "primary_sport_id": 0,
@@ -16,29 +16,28 @@
       "isCoach": false,
       "isAthlete": false,
       "clubs": [
-        "CSM Suceava",
+        "CSM Bucuresti",
         "Steaua"
       ]
     },
     {
       "id": 2,
-      "name": "Denis Copilu",
+      "name": "Coach Special",
       "email": "coach@gmail.com",
       "password": "parola",
-      "role_id": 2,
       "gender": "male",
-      "primary_sport_id": 1,
-      "secondary_sport_id": 3,
+      "primary_sport_id": 0,
+      "secondary_sport_id": 0,
       "height": 170,
-      "weight": 80,
-      "age": 21,
+      "weight": 90,
+      "age": 25,
       "profile_photo": " ",
-      "isAdmin": false,
-      "isCoach": true,
+      "isAdmin": true,
+      "isCoach": false,
       "isAthlete": false,
       "clubs": [
         "CSM Bucuresti",
-        "Dinamo"
+        "Steaua"
       ]
     },
     {
@@ -76,7 +75,10 @@
       "isAdmin": true,
       "isCoach": false,
       "isAthlete": false,
-      "clubs": "CSM Bucuresti"
+      "clubs": [
+        "Steaua",
+        "CSM Suceava"
+      ]
     }
   ],
   "sport": [
@@ -116,15 +118,7 @@
     },
     {
       "id": 6,
-      "name": "CSM Bucuresti"
-    }
-  ],
-  "events": [
-    {
-      "id": 1,
-      "name": "event",
-      "date": "20.02.2021",
-      "time": "3H",
+      "name": "CSM Bucuresti",
       "description": "Intalnirea arbitrilor de Rugby",
       "location": "Suceava",
       "club_id": 2,
