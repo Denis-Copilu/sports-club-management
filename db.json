@@ -125,6 +125,30 @@
       "sport_type_id": 3
     }
   ],
+  "events": [
+    {
+      "id": 1,
+      "name": "Running for Life",
+      "date": "28.02.2021",
+      "time": "2h",
+      "description": "Intalnirea arbitrilor de Rugby",
+      "location": "Suceava",
+      "event_cover": "",
+      "club_id": 2,
+      "sport_type_id": 3
+    },
+    {
+      "id": 2,
+      "name": "Running for Life",
+      "date": "28.010.2021",
+      "time": "2h",
+      "description": "Intalnirea arbitrilor de Fotbal",
+      "location": "Iasi",
+      "event_cover": "",
+      "club_id": 2,
+      "sport_type_id": 3
+    }
+  ],
   "workout": [
     {
       "id": 1,

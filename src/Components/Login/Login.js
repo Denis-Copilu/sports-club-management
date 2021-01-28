@@ -47,7 +47,7 @@ export const Login = () => {
 
   return (
     <div id="content-page">
-      {isLoggedIn && <Redirect to="/clubs" />}
+      {isLoggedIn && <Redirect to="/coaches" />}
 
       <div className="contentLog">
         <div className="elementsLogin">

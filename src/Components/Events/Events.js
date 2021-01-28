@@ -1,13 +1,13 @@
 import {Navbar} from "../Common/Navbar/Navbar";
+import {EventElements} from "./EventElements";
+import './Events.css';
 export const Events = () => {
   return (
     <div className="contentPage">
     <Navbar></Navbar>
-    <div className="coachesPage">
+    <div className="eventsPage">
       <p id="title">Events</p>
-       {/* <div id="table1">
-         {<Table></Table>}
-      </div> */}
+     <EventElements/>
     </div>
   </div>
     

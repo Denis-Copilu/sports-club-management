@@ -1,7 +1,7 @@
 @import url('https://rsms.me/inter/inter.css');
 html { font-family: 'Inter', sans-serif; }
 .navBar {
-    width: 15%;
+    min-width: 15%;
     height: 100vh;   
     display: flex;
     justify-content: center;
@@ -79,7 +79,7 @@ a:link, a:visited {
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
-    margin-top:100%;
+    margin-top:45%;
     
   }
 #logoutBtn:hover{
@@ -144,7 +144,7 @@ a:link, a:visited {
     align-items: center;
 }
 .userContent{
-    padding-top: 20%;
+    /* padding-top: 0%; */
     padding-bottom: 30%;
     align-items: center;  
 }
