@@ -1,10 +1,15 @@
 import {Navbar} from "../Common/Navbar/Navbar";
 export const Events = () => {
   return (
-    <div>
-      <Navbar></Navbar>
-      <p>Coaches</p>            
+    <div className="contentPage">
+    <Navbar></Navbar>
+    <div className="coachesPage">
+      <p id="title">Events</p>
+       {/* <div id="table1">
+         {<Table></Table>}
+      </div> */}
     </div>
+  </div>
     
   );
 }
