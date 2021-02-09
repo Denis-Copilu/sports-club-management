@@ -1,21 +1,41 @@
 import { Navbar } from "../Common/Navbar/Navbar";
 import { EventElements } from "./EventElements";
-import { Container } from 'react-bootstrap';
-import React from "react";
+import { Container,Modal } from 'react-bootstrap';
+import React, { Fragment } from "react";
 import axios from 'axios';
 import './Events.css';
+import  Pagination  from '../Common/Pagination/Pagination';
 const URLEvents = 'http://localhost:3000/events';
 export const Events = () => {
   const [events, setEvents] = React.useState([]);
+  const [eventToEdit,setEventToEdit] = React.useState({});
+  const [showEA, setShowEA] = React.useState(false);
+  const [title, setTitle] = React.useState("");
+  const [type, setType] = React.useState("");
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [postsPerPage] = React.useState(2);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPost = events.slice(indexOfFirstPost,indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   React.useEffect(() => {
     getEvents();
   }, [])
   const getEvents = async () => {
     const response = await axios.get(URLEvents);
     setEvents(response.data);
-    // setNameEvent(events[0].name);
-    // setDescriptionEvent(events[0].description);
   }
+  const handleShowEA = (type, event = {}) => {
+    setTitle(type + " Event");
+    setShowEA(true);
+    if (event) {
+        setEventToEdit(event);
+    }
+}
+const handleCloseEA = () => {
+  setShowEA(false);
+}
   return (
     <div className="contentPage">
       <Navbar></Navbar>
@@ -23,7 +43,7 @@ export const Events = () => {
         <p id="title">Events</p>
         <div id="btn-input">
           <input id="searchInput" ></input>
-          <button id='btnAdd1' >Add new</button>
+          <button id='btnAdd1' onClick={() => { handleShowEA("Add"); setType("add");}} >Add new</button>
         </div>
         <div id="btnEvents">
         <button className="btnTypeEvents" >Ongoing</button>
@@ -32,7 +52,7 @@ export const Events = () => {
         </div>
         <div className="eventsList">
           {
-            events && events.map((event, index) => {
+            currentPost && currentPost.map((event, index) => {
               return (
                 <div key={index}>
                   <Container>
@@ -43,8 +63,27 @@ export const Events = () => {
             })
           }
         </div>
+        <Pagination 
+            postsPerPage={postsPerPage} 
+            totalPosts={events.length} 
+            paginate={paginate}
+            />
       </div>
+      <Fragment>
+      <Modal show={showEA} onHide={handleCloseEA} animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title id="lblTitle">{title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {/* <FormCreateEdit employee={employeeToEdit} clubs={clubs} formType={type} handleCloseEA={handleCloseEA} handleShowDel={handleShowDel} handleShowConfirmAdd={handleShowConfirmAdd} editData={editData} createData={createData} /> */}
+                </Modal.Body>
+                <Modal.Footer>
+
+                </Modal.Footer>
+            </Modal>
+    </Fragment>
     </div>
+    
 
   );
 }

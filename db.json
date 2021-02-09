@@ -227,6 +227,28 @@
       "event_cover": "",
       "club_id": 2,
       "sport_type_id": 3
+    },
+    {
+      "id": 3,
+      "name": "Running for Life",
+      "date": "28.02.2021",
+      "time": "09:00",
+      "description": "Intalnirea arbitrilor de Baschet din Romania. Ad enim sit commodo laborum mollit. Incididunt Lorem exercitation ad occaecat reprehenderit id. ",
+      "location": "Bucuresti Fortress, Main Enter",
+      "event_cover": "",
+      "club_id": 2,
+      "sport_type_id": 3
+    },
+    {
+      "id": 4,
+      "name": "Running for Life",
+      "date": "28.10.2021",
+      "time": "09:00",
+      "description": "Intalnirea arbitrilor de Hockey din Romania. Ad enim sit commodo laborum mollit. Incididunt Lorem exercitation ad occaecat reprehenderit id. ",
+      "location": "Timisoara Fortress, Main Enter",
+      "event_cover": "",
+      "club_id": 2,
+      "sport_type_id": 3
     }
   ],
   "workout": [
