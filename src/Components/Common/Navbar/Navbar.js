@@ -9,7 +9,7 @@ export const Navbar = () => {
       <div className="navBarControls">
         <div className="userContent">
           <Image src={p_photo} roundedCircle ></Image>
-          <p id="name">Connie Webb</p>
+          <p id="name">{localStorage.username}</p>
           <p id="role">ADMINISTRATOR</p>
         </div>
         <div className="buttonsControl">

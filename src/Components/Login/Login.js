@@ -22,19 +22,20 @@ export const Login = () => {
       }
     })
       .then(response => {
+        
         const { data } = response;
         console.log(response.length);
-        if (data.length) {
+        if (data.length && data[0].isAdmin===true) {
           const loginData = {
-            name: 'username',
+            name: data[0].name,
             value: data[0].email,
             daysUntilExpire: 1,
           };
-
+          
           Utils.eraseCookie('username');
           Utils.setCookie({ ...loginData });
           localStorage.setItem('isLoggedIn', true);
-
+          localStorage.setItem('username',loginData.name);
           window.location.href = "/coaches";
         } else {
           setLoginError('Email and/or password incorrect');

@@ -7,7 +7,6 @@ import { FormCreateEdit } from '../Common/OpenForm/FormCreateEdit';
 import { FormDelete } from '../Common/OpenForm/FormDelete';
 import { FormConfirmAdd } from '../Common/OpenForm/FormConfirmAdd';
 import  Pagination  from '../Common/Pagination/Pagination';
- import ReactPaginate from 'react-paginate';
 const URL = 'http://localhost:3000/user';
 const URLClubs = 'http://localhost:3000/clubs';
 export const Table = () => {
@@ -25,47 +24,28 @@ export const Table = () => {
     const [maxID, setMaxID] = React.useState();
     const [employeeToEdit, setEmployeeToEdit] = React.useState({});
     const [employeeToDelete, setEmployeeToDelete] = React.useState();
-     /////////////////////////////
-     const [currentPage, setCurrentPage] = React.useState(1);
-     const [postsPerPage] = React.useState(5);
-    //  React.useEffect(()=>{
-    //     const fetchPosts = async () =>{
-    //         setLoading(true);
-    //         const res = await axios.get('');
-    //     }
-    //  });
+    const [currentPage, setCurrentPage] = React.useState(1);
+    const [postsPerPage] = React.useState(6);
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPost = searchedEmployees.slice(indexOfFirstPost,indexOfLastPost);
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-     /////////////////////////////
 
      React.useEffect(() => {
         getData();
     }, []);
 
     const getData = async () => {
-
-        // setLoading(true);
-
         const response = await axios.get(URL)
-
-        // setPosts(response.data);
-
         setEmployees(response.data);
         setSearchedEmployees(response.data)
-        console.log(response.data[response.data.length - 1].id);
         setMaxID(response.data[response.data.length - 1].id);
-
-        // setLoading(false);
-
     }
 
     const getClubs = async () => {
 
         const response = await axios.get(URLClubs);
         setClubs(response.data);
-        console.log(response.data);
     }
     React.useEffect(() => {
         getClubs();
@@ -81,26 +61,20 @@ export const Table = () => {
             setEmployeeToEdit(employee);
         }
     }
-    //
     const handleCloseConfirmAdd = () => {
         setShowConfirmAdd(false);
     }
     const handleShowConfirmAdd = () => {
         setTitle("Coach Added");
         setShowConfirmAdd(true);
-        // if (employee) {
-        //     setEmployeeToEdit(employee);
-        // }
     }
-    //
     const handleCloseDel = () => setShowDel(false);
     const handleShowDel = (employee) => {
         let nameCoachToBeDeleted = [];
         let idCoachToBeDeleted = [];
         if(employee instanceof Array)
         {
-            //console.log(employees);
-            employees.map((emp)=>{employee.forEach((idEmp)=>{if(emp.id == idEmp){nameCoachToBeDeleted.push(emp.name);idCoachToBeDeleted.push(idEmp);console.log(emp.name+" "+idEmp);}})})
+            employees.map((emp)=>{employee.forEach((idEmp)=>{if(emp.id == idEmp){nameCoachToBeDeleted.push(emp.name);idCoachToBeDeleted.push(idEmp);}})})
             setName(nameCoachToBeDeleted);
             setIdDel(idCoachToBeDeleted);
         }
@@ -114,22 +88,17 @@ export const Table = () => {
     }
     
     const removeData = (id) => {
-        //functioneaza stergerea, dar se opreste serverul
-        // if(id.length!=undefined)
         if(id instanceof Array)
         {
-        id.forEach(id=>{console.log(id);
+        id.forEach(id=>{
         axios.delete(`${URL}/${id}`).then(res => {
             const del = employees.filter(employee => id !== employee.id)
             setEmployees(del);
             setSearchedEmployees(del)
         })
-        });
-        console.log("arr");
-            
+        });   
         }
         else{
-            console.log("not arr");
             axios.delete(`${URL}/${id}`).then(res => {
                 const del = employees.filter(employee => id !== employee.id)
                 setEmployees(del);
@@ -137,17 +106,8 @@ export const Table = () => {
             })
         }
         window.location.reload();
-        // id.forEach(id=>{
-        //     console.log(id);
-        // })
-        // axios.delete(`${URL}/${id}`).then(res => {
-        //     const del = employees.filter(employee => id !== employee.id)
-        //     setEmployees(del);
-        //     setSearchedEmployees(del)
-        // })
     }
     const createData = (firstName, lastName, email, editedClubs) => {
-        console.log(firstName + " " + lastName);
         setShowEditedClubs(editedClubs);
         var data = {
             id: maxID + 1,
@@ -170,13 +130,9 @@ export const Table = () => {
             handleCloseEA();
         })
         window.location.reload();
-        console.log(data);
-
     }
     const editData = (id, firstName, lastName, email, editedClubs) => {
-        console.log(editedClubs);
         axios.patch(`${URL}/${id}`, { name: firstName + " " + lastName, email: email, clubs: editedClubs }).then(() => {
-            //window.location.reload();
             handleCloseEA();
             window.location.reload();
         })
@@ -190,8 +146,6 @@ export const Table = () => {
     }
     const search = (e) => {
         const searchedWord = e.target.value;
-        console.log(searchedWord)
-
         if (!searchedWord.length > 0) {
             setSearchedEmployees(employees);
         } else {
@@ -203,7 +157,7 @@ export const Table = () => {
         const allCoach = document.querySelectorAll('.checkbox-coach');
         const btnDel1= document.getElementById('btnDel1');
         let selectedCoachId = [];
-        allCoach.forEach(coach => {if(coach.checked){selectedCoachId.push(coach.id)}  console.log(coach.checked+" "+coach.id);});
+        allCoach.forEach(coach => {if(coach.checked){selectedCoachId.push(coach.id)}  });
         if(selectedCoachId.length>=1) {
             btnDel1.style.display="inline-flex";
         }
@@ -212,42 +166,34 @@ export const Table = () => {
             btnDel1.style.display="none";
         }
         setEmployeeToDelete(selectedCoachId);
-        
-        console.log(selectedCoachId);
     }
     const selectAllCoaches = (classInputAll) =>{
         const stateCheckboxAll = document.querySelector(classInputAll);
         const allCoach = document.querySelectorAll('.checkbox-coach');
         const btnDel1= document.getElementById('btnDel1');
         let selectedCoachId = [];
-        let selectedCoachName = [];
-        console.log(stateCheckboxAll.checked);
-        //console.log(btnDel1.style.display);
-        //stateCheckboxAll.checked ? allCoach.forEach(coach => { coach.checked=true;}) : allCoach.forEach(coach => { coach.checked=false;});
         if(stateCheckboxAll.checked){  
             allCoach.forEach(coach => { coach.checked=true;});
 
             btnDel1.style.display="inline-flex";
-            console.log(allCoach);
-            allCoach.forEach(coach => {if(coach.checked){selectedCoachId.push(coach.id);}  console.log(coach.checked+" "+coach.id);});
+            allCoach.forEach(coach => {if(coach.checked){selectedCoachId.push(coach.id);}});
             setEmployeeToDelete(selectedCoachId);
         }
         else if(stateCheckboxAll.checked==false)
         {
             allCoach.forEach(coach => { coach.checked=false;});
             btnDel1.style.display="none";
-            allCoach.forEach(coach => {if(coach.checked){selectedCoachId.pop(coach.id)}  console.log(coach.checked+" "+coach.id);});
+            allCoach.forEach(coach => {if(coach.checked){selectedCoachId.pop(coach.id)}});
             setEmployeeToDelete(selectedCoachId);
         }
-         setEmployeeToDelete(selectedCoachId);
-        
+         setEmployeeToDelete(selectedCoachId); 
     }
     return (
         <Fragment>
             <div id="btn-input">
                 <input id="searchInput" onChange={(e) => { search(e) }}></input>
                 <button id='btnAdd1' onClick={() => { handleShowEA("Add"); setType("add"); }}>Add new</button>
-                <button id='btnDel1' display="none"  className="btn-danger" onClick={() => {handleShowDel(employeeToDelete); console.log("Esti pe cale sa stergi ceva. :D"); }}>Delete</button>
+                <button id='btnDel1' display="none"  className="btn-danger" onClick={() => {handleShowDel(employeeToDelete);}}>Delete</button>
             </div>
             <table id="coaches">
                 <thead>
@@ -255,6 +201,7 @@ export const Table = () => {
                 </thead>
                 <tbody>
                     {currentPost && currentPost.map((employee) => {
+                        if(employee.isAdmin===false)
                         return (
 
                             <tr key={employee.id}>
@@ -280,20 +227,6 @@ export const Table = () => {
             totalPosts={searchedEmployees.length} 
             paginate={paginate}
             />
-            
-            {/* <ReactPaginate
-                previousLabel={'previous'}
-                nextLabel={'next'}
-                breakLabel={'...'}
-                breakClassName={'break-me'}
-                pageCount={15}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
-                onPageChange={1}
-                containerClassName={'pagination'}
-                subContainerClassName={'pages pagination'}
-                activeClassName={'active'}
-        /> */}
             <Modal show={showEA} onHide={handleCloseEA} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title id="lblTitle">{title}</Modal.Title>
