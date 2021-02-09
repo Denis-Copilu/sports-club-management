@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import axios from 'axios';
-import { Modal, Form } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import './TableCoaches.css';
 import { FormCreateEdit } from '../Common/OpenForm/FormCreateEdit';
 import { FormDelete } from '../Common/OpenForm/FormDelete';
 import { FormConfirmAdd } from '../Common/OpenForm/FormConfirmAdd';
-import  Paginate  from '../Common/Pagination/Pagination';
-// import ReactPaginate from 'react-paginate';
+import  Pagination  from '../Common/Pagination/Pagination';
+ import ReactPaginate from 'react-paginate';
 const URL = 'http://localhost:3000/user';
 const URLClubs = 'http://localhost:3000/clubs';
 export const Table = () => {
@@ -25,6 +25,52 @@ export const Table = () => {
     const [maxID, setMaxID] = React.useState();
     const [employeeToEdit, setEmployeeToEdit] = React.useState({});
     const [employeeToDelete, setEmployeeToDelete] = React.useState();
+     /////////////////////////////
+     const [currentPage, setCurrentPage] = React.useState(1);
+     const [postsPerPage] = React.useState(5);
+    //  React.useEffect(()=>{
+    //     const fetchPosts = async () =>{
+    //         setLoading(true);
+    //         const res = await axios.get('');
+    //     }
+    //  });
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPost = searchedEmployees.slice(indexOfFirstPost,indexOfLastPost);
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+     /////////////////////////////
+
+     React.useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = async () => {
+
+        // setLoading(true);
+
+        const response = await axios.get(URL)
+
+        // setPosts(response.data);
+
+        setEmployees(response.data);
+        setSearchedEmployees(response.data)
+        console.log(response.data[response.data.length - 1].id);
+        setMaxID(response.data[response.data.length - 1].id);
+
+        // setLoading(false);
+
+    }
+
+    const getClubs = async () => {
+
+        const response = await axios.get(URLClubs);
+        setClubs(response.data);
+        console.log(response.data);
+    }
+    React.useEffect(() => {
+        getClubs();
+    }, [])
+    
     const handleCloseEA = () => {
         setShowEA(false);
     }
@@ -66,27 +112,7 @@ export const Table = () => {
         setTitle("Delete Coach");
         setShowDel(true);
     }
-    React.useEffect(() => {
-        getData();
-    }, [])
-    const getClubs = async () => {
-
-        const response = await axios.get(URLClubs);
-        setClubs(response.data);
-        console.log(response.data);
-    }
-    React.useEffect(() => {
-        getClubs();
-    }, [])
-    const getData = async () => {
-
-        const response = await axios.get(URL)
-
-        setEmployees(response.data);
-        setSearchedEmployees(response.data)
-        console.log(response.data[response.data.length - 1].id);
-        setMaxID(response.data[response.data.length - 1].id);
-    }
+    
     const removeData = (id) => {
         //functioneaza stergerea, dar se opreste serverul
         // if(id.length!=undefined)
@@ -228,7 +254,7 @@ export const Table = () => {
                     <tr>{renderHeader()}</tr>
                 </thead>
                 <tbody>
-                    {searchedEmployees && searchedEmployees.map((employee) => {
+                    {currentPost && currentPost.map((employee) => {
                         return (
 
                             <tr key={employee.id}>
@@ -249,7 +275,12 @@ export const Table = () => {
                     }
                 </tbody>
             </table>
-            {/* <Paginate/> */}
+            <Pagination 
+            postsPerPage={postsPerPage} 
+            totalPosts={searchedEmployees.length} 
+            paginate={paginate}
+            />
+            
             {/* <ReactPaginate
                 previousLabel={'previous'}
                 nextLabel={'next'}
