@@ -2,8 +2,8 @@
   "user": [
     {
       "id": 1,
-      "name": "Georgica Hagi",
-      "email": "gicahagi@gmail.com",
+      "name": "Denis Copilu",
+      "email": "deniscopilu@gmail.com",
       "password": "parola",
       "gender": "male",
       "primary_sport_id": 0,
@@ -32,12 +32,12 @@
       "weight": 90,
       "age": 25,
       "profile_photo": " ",
-      "isAdmin": true,
-      "isCoach": false,
+      "isAdmin": false,
+      "isCoach": true,
       "isAthlete": false,
       "clubs": [
-        "CSM Bucuresti",
-        "Steaua"
+        "Runners",
+        "Vikings"
       ]
     },
     {
@@ -52,8 +52,8 @@
       "weight": 90,
       "age": 25,
       "profile_photo": " ",
-      "isAdmin": true,
-      "isCoach": false,
+      "isAdmin": false,
+      "isCoach": true,
       "isAthlete": false,
       "clubs": [
         "CSM Bucuresti",
@@ -72,12 +72,94 @@
       "weight": 90,
       "age": 25,
       "profile_photo": " ",
-      "isAdmin": true,
-      "isCoach": false,
+      "isAdmin": false,
+      "isCoach": true,
       "isAthlete": false,
       "clubs": [
         "Steaua",
         "CSM Suceava"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Pedro Starck",
+      "email": "pedrostarck@gmail.com",
+      "password": "parola",
+      "gender": "male",
+      "primary_sport_id": 0,
+      "secondary_sport_id": 0,
+      "height": 170,
+      "weight": 90,
+      "age": 25,
+      "profile_photo": " ",
+      "isAdmin": false,
+      "isCoach": true,
+      "isAthlete": false,
+      "clubs": [
+        "CSM Suceava",
+        "Dinamo"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Roman Hileman",
+      "email": "romanhileman@gmail.com",
+      "password": "parola",
+      "gender": "male",
+      "primary_sport_id": 0,
+      "secondary_sport_id": 0,
+      "height": 170,
+      "weight": 90,
+      "age": 25,
+      "profile_photo": " ",
+      "isAdmin": false,
+      "isCoach": true,
+      "isAthlete": false,
+      "clubs": [
+        "CSM Bucuresti",
+        "Steaua"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "John Bascom",
+      "email": "johnbascom@gmail.com",
+      "password": "parola",
+      "gender": "male",
+      "primary_sport_id": 0,
+      "secondary_sport_id": 0,
+      "height": 170,
+      "weight": 90,
+      "age": 25,
+      "profile_photo": " ",
+      "isAdmin": false,
+      "isCoach": true,
+      "isAthlete": false,
+      "clubs": [
+        "Vikings",
+        "Dinamo",
+        "CSM Bucuresti"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Leon Nash",
+      "email": "leon@gmail.com",
+      "password": "parola",
+      "gender": "male",
+      "primary_sport_id": 0,
+      "secondary_sport_id": 0,
+      "height": 170,
+      "weight": 90,
+      "age": 25,
+      "profile_photo": " ",
+      "isAdmin": false,
+      "isCoach": true,
+      "isAthlete": false,
+      "clubs": [
+        "Steaua",
+        "Runners",
+        "Vikings"
       ]
     }
   ],
@@ -121,6 +203,52 @@
       "name": "CSM Bucuresti",
       "description": "Intalnirea arbitrilor de Rugby",
       "location": "Suceava",
+      "club_id": 2,
+      "sport_type_id": 3
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "name": "Sprint Berry",
+      "date": "28.02.2021",
+      "time": "09:00",
+      "description": "Intalnirea arbitrilor de Rugby din Romania. Ad enim sit commodo laborum mollit. Incididunt Lorem exercitation ad occaecat reprehenderit id. ",
+      "location": "Suceava Fortress, Main Enter",
+      "event_cover": "",
+      "club_id": 2,
+      "sport_type_id": 3
+    },
+    {
+      "id": 2,
+      "name": "Running for Life",
+      "date": "28.10.2021",
+      "time": "09:00",
+      "description": "Intalnirea arbitrilor de Fotbal din Romania. Ad enim sit commodo laborum mollit. Incididunt Lorem exercitation ad occaecat reprehenderit id. ",
+      "location": "Iasi Fortress, Main Enter",
+      "event_cover": "",
+      "club_id": 2,
+      "sport_type_id": 3
+    },
+    {
+      "id": 3,
+      "name": "Super Play",
+      "date": "28.02.2021",
+      "time": "09:00",
+      "description": "Intalnirea arbitrilor de Baschet din Romania. Ad enim sit commodo laborum mollit. Incididunt Lorem exercitation ad occaecat reprehenderit id. ",
+      "location": "Bucuresti Fortress, Main Enter",
+      "event_cover": "",
+      "club_id": 2,
+      "sport_type_id": 3
+    },
+    {
+      "id": 4,
+      "name": "Sports Discovery",
+      "date": "28.10.2021",
+      "time": "09:00",
+      "description": "Intalnirea arbitrilor de Hockey din Romania. Ad enim sit commodo laborum mollit. Incididunt Lorem exercitation ad occaecat reprehenderit id. ",
+      "location": "Timisoara Fortress, Main Enter",
+      "event_cover": "",
       "club_id": 2,
       "sport_type_id": 3
     }

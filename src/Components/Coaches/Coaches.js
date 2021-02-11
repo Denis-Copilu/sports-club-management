@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar } from "../Common/Navbar/Navbar";
 import './Coaches.css';
-import {Table} from './TableCoaches';
+import { Table } from './TableCoaches';
 
 export const Coaches = () => {
 
@@ -10,8 +10,8 @@ export const Coaches = () => {
       <Navbar></Navbar>
       <div className="coachesPage">
         <p id="title">Coaches</p>
-         <div id="table1">
-           {<Table></Table>}
+        <div id="table1">
+          {<Table></Table>}
         </div>
       </div>
     </div>
