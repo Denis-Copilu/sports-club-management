@@ -1,12 +1,9 @@
 import React from "react";
 import Image from 'react-bootstrap/Image';
-// import { DateTime } from 'react-datetime-bootstrap';
 import './EventElements.css';
 import e_photo from "../../assets/Images/eventImage1.png";
 
 export const EventElements = (eventsList) => {
-  console.log(eventsList.nameEvent);
-  
   return (
     <div className="eventElement">
       <div className="eventContent">

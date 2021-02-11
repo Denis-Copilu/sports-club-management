@@ -1,14 +1,11 @@
   #btnAdd{
     align-items:center;
     padding: 16px;
-
     background: #1A1A1A;
     color: #44DABD;
     border-radius: 8px;
-
     width: 140px;
     height: 46px;
-
     font-family: Inter;
     font-style: normal;
     font-weight: bold;
@@ -26,14 +23,14 @@
     text-transform: capitalize;
     color: #000000;
     
-      }
+  }
   #drpDownClub{
-  background: #FFFFFF;
-  color: #8E9296;
-  border: 1px solid #8E9296;
-  box-sizing: border-box;
-  border-radius: 8px;
-  width: 100%;
+    background: #FFFFFF;
+    color: #8E9296;
+    border: 1px solid #8E9296;
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 100%;
   }
   #btnCancel{
     align-items:center;
@@ -53,8 +50,4 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     border: none;
-  }
-  
-  @media screen and (max-width: 425px) {
-    
   }

@@ -24,59 +24,7 @@
 }
 #btnEvents{
     display: flex;
-    /* margin: 1.2%; */
 }
 #btn-input{
-    /* background-color:red; */
     display: flex;
 }
-/* #btnOngoing
-{
-    align-items:center;
-    padding: 16px;
-
-    background: #1A1A1A;
-    color: white;
-    border-radius: 8px;
-
-    width: 140px;
-    height: 46px;
-
-    font-family: Inter;
-    font-style: normal;
-    font-size: 14px;
-    line-height: 14px;
-}
-#btnFuture{
-    align-items:center;
-    padding: 16px;
-
-    background: #1A1A1A;
-    color: white;
-    border-radius: 8px;
-
-    width: 140px;
-    height: 46px;
-
-    font-family: Inter;
-    font-style: normal;
-    font-size: 14px;
-    line-height: 14px;
-}
-#btnPast{
-    align-items:center;
-    padding: 16px;
-
-    background: #1A1A1A;
-    color: white;
-    border-radius: 8px;
-
-    width: 140px;
-    height: 46px;
-
-    font-family: Inter;
-    font-style: normal;
-    font-size: 14px;
-    line-height: 14px;
-   
-} */

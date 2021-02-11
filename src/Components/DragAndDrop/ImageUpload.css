@@ -1,0 +1,9 @@
+#dragAndDrop{
+    background-color: #F9F9F9;
+    border-radius: 20px;
+    width: 100%;
+    padding: 5%;
+    border-style:dashed;
+    border-color: black;
+    align-items: center;
+}

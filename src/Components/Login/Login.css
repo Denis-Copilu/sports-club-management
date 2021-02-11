@@ -3,7 +3,6 @@
   display: flex;
   height: 100vh;
 }
-
 #content-page {
   display: flex;
   justify-content: center;
@@ -16,7 +15,6 @@
   align-items: center;
   background: #F9F9F9;
 }
-
 #logMsg{
   padding-bottom: 50%;
 }
@@ -39,18 +37,15 @@
   line-height: 42px;   
   text-transform: capitalize;
   color: #000000;
-}
-  
+} 
 #lbl{
-font-family: Inter;
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 16px;
-text-transform: capitalize;
-
-color: #000000;
-
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: capitalize;
+  color: #000000;
   }
 #btnSubmit{
   align-items: center;
@@ -60,7 +55,6 @@ color: #000000;
   color: #44DABD;
   border-radius: 8px;
 }
-
 .elementsLogin{
   text-align: left;
   align-items: center;
@@ -68,13 +62,11 @@ color: #000000;
 .row {
   height: 100vh;
 }
-
 @media screen and (max-width: 425px) {
   #hero-img {
     display: none;
   }
-
-  .contentLog {
+.contentLog {
     width: 100%;
   }
 }

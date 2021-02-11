@@ -2,7 +2,6 @@
     display: inline-flex;
     background-color: white;
     border-radius: 2%;
-    /* padding:5%; */
 }
 .eventsList{
     display: inline-flex;
@@ -38,10 +37,6 @@
     font-weight: normal;
     font-size: 12px;
     line-height: 14px;
-    /* display: flex;
-    align-items: center;
-    letter-spacing: 0.06em;
-    text-transform: uppercase; */
 }
 #titleEvent{
     font-family: Inter;
@@ -52,10 +47,8 @@
     color: black;
     display: flex;
     align-items: center;
-
 }
 .contentEvent{
     margin-left: 3%;
     text-align: left;
-    
 }

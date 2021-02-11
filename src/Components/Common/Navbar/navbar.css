@@ -80,7 +80,6 @@ a:link, a:visited {
     font-weight: 600;
     font-size: 14px;
     margin-top:45%;
-    
   }
 #logoutBtn:hover{
     width: auto;
@@ -93,10 +92,8 @@ a:link, a:visited {
     background-image: url('../../../assets/Images/coaches.svg');
     width: 24px;
     height: 21px;
-    display:inline-block;
-    
+    display:inline-block; 
 }
-
 #events-icon {
     background-image: url('../../../assets/Images/events.svg'); 
     width: 24px;
@@ -144,7 +141,6 @@ a:link, a:visited {
     align-items: center;
 }
 .userContent{
-    /* padding-top: 0%; */
     padding-bottom: 30%;
     align-items: center;  
 }

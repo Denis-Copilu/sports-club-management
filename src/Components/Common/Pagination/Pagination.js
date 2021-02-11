@@ -1,11 +1,8 @@
-import { paginationReducer } from '@material-ui/data-grid';
 import React from 'react';
-//import './Pagination.css';
 
-export const Pagination = ({postsPerPage, totalPosts, paginate}) => {
+export const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
-
-  for(let i = 1; i <= Math.ceil(totalPosts / postsPerPage);i++){
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
   return (
@@ -13,12 +10,12 @@ export const Pagination = ({postsPerPage, totalPosts, paginate}) => {
       <ul className='pagination pagination-lg'>
         {pageNumbers.map(number => (
           <li key={number} className='page-item'>
-              <a onClick={() => paginate(number)}  className='page-link'>
-                {number}
-              </a>
+            <a onClick={() => paginate(number)} className='page-link'>
+              {number}
+            </a>
           </li>
         ))}
-      </ul>      
+      </ul>
     </nav>
   )
 }

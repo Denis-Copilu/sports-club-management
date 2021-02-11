@@ -1,10 +1,13 @@
-import {Navbar} from '../Common/Navbar/Navbar';
+import { Navbar } from '../Common/Navbar/Navbar';
+import './Clubs.css';
 export const Clubs = () => {
   return (
-    <div>
+    <div className="contentPage">
       <Navbar></Navbar>
-      <p>Clubs</p>          
+      <div className="clubsPage">
+        <p id="title">Clubs</p>
+      </div>
     </div>
-    
+
   );
 }

@@ -36,8 +36,8 @@
       "isCoach": true,
       "isAthlete": false,
       "clubs": [
-        "CSM Bucuresti",
-        "Steaua"
+        "Runners",
+        "Vikings"
       ]
     },
     {
@@ -96,8 +96,8 @@
       "isCoach": true,
       "isAthlete": false,
       "clubs": [
-        "CSM Bucuresti",
-        "Steaua"
+        "CSM Suceava",
+        "Dinamo"
       ]
     },
     {
@@ -136,8 +136,9 @@
       "isCoach": true,
       "isAthlete": false,
       "clubs": [
-        "CSM Bucuresti",
-        "Steaua"
+        "Vikings",
+        "Dinamo",
+        "CSM Bucuresti"
       ]
     },
     {
@@ -157,7 +158,8 @@
       "isAthlete": false,
       "clubs": [
         "Steaua",
-        "CSM Suceava"
+        "Runners",
+        "Vikings"
       ]
     }
   ],
@@ -208,7 +210,7 @@
   "events": [
     {
       "id": 1,
-      "name": "Running for Life",
+      "name": "Sprint Berry",
       "date": "28.02.2021",
       "time": "09:00",
       "description": "Intalnirea arbitrilor de Rugby din Romania. Ad enim sit commodo laborum mollit. Incididunt Lorem exercitation ad occaecat reprehenderit id. ",
@@ -230,7 +232,7 @@
     },
     {
       "id": 3,
-      "name": "Running for Life",
+      "name": "Super Play",
       "date": "28.02.2021",
       "time": "09:00",
       "description": "Intalnirea arbitrilor de Baschet din Romania. Ad enim sit commodo laborum mollit. Incididunt Lorem exercitation ad occaecat reprehenderit id. ",
@@ -241,7 +243,7 @@
     },
     {
       "id": 4,
-      "name": "Running for Life",
+      "name": "Sports Discovery",
       "date": "28.10.2021",
       "time": "09:00",
       "description": "Intalnirea arbitrilor de Hockey din Romania. Ad enim sit commodo laborum mollit. Incididunt Lorem exercitation ad occaecat reprehenderit id. ",

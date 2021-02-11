@@ -6,7 +6,7 @@ import './TableCoaches.css';
 import { FormCreateEdit } from '../Common/OpenForm/FormCreateEdit';
 import { FormDelete } from '../Common/OpenForm/FormDelete';
 import { FormConfirmAdd } from '../Common/OpenForm/FormConfirmAdd';
-import  Pagination  from '../Common/Pagination/Pagination';
+import Pagination from '../Common/Pagination/Pagination';
 const URL = 'http://localhost:3000/user';
 const URLClubs = 'http://localhost:3000/clubs';
 export const Table = () => {
@@ -16,7 +16,7 @@ export const Table = () => {
     const [showEA, setShowEA] = React.useState(false);
     const [showDel, setShowDel] = React.useState(false);
     const [showConfirmAdd, setShowConfirmAdd] = React.useState(false);
-    const [showEditedClubs,setShowEditedClubs] = React.useState();
+    const [showEditedClubs, setShowEditedClubs] = React.useState();
     const [title, setTitle] = React.useState("");
     const [type, setType] = React.useState("");
     const [name, setName] = React.useState("");
@@ -28,29 +28,25 @@ export const Table = () => {
     const [postsPerPage] = React.useState(6);
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPost = searchedEmployees.slice(indexOfFirstPost,indexOfLastPost);
+    const currentPost = searchedEmployees.slice(indexOfFirstPost, indexOfLastPost);
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-     React.useEffect(() => {
+    React.useEffect(() => {
         getData();
     }, []);
-
     const getData = async () => {
         const response = await axios.get(URL)
         setEmployees(response.data);
         setSearchedEmployees(response.data)
         setMaxID(response.data[response.data.length - 1].id);
     }
-
     const getClubs = async () => {
-
         const response = await axios.get(URLClubs);
         setClubs(response.data);
     }
     React.useEffect(() => {
         getClubs();
     }, [])
-    
     const handleCloseEA = () => {
         setShowEA(false);
     }
@@ -72,33 +68,29 @@ export const Table = () => {
     const handleShowDel = (employee) => {
         let nameCoachToBeDeleted = [];
         let idCoachToBeDeleted = [];
-        if(employee instanceof Array)
-        {
-            employees.map((emp)=>{employee.forEach((idEmp)=>{if(emp.id == idEmp){nameCoachToBeDeleted.push(emp.name);idCoachToBeDeleted.push(idEmp);}})})
+        if (employee instanceof Array) {
+            employees.map((emp) => { employee.forEach((idEmp) => { if (emp.id == idEmp) { nameCoachToBeDeleted.push(emp.name); idCoachToBeDeleted.push(idEmp); } }) })
             setName(nameCoachToBeDeleted);
             setIdDel(idCoachToBeDeleted);
         }
-        else{
-        setName(employee.name);
-        setIdDel(employee.id);
+        else {
+            setName(employee.name);
+            setIdDel(employee.id);
         }
-        
         setTitle("Delete Coach");
         setShowDel(true);
     }
-    
     const removeData = (id) => {
-        if(id instanceof Array)
-        {
-        id.forEach(id=>{
-        axios.delete(`${URL}/${id}`).then(res => {
-            const del = employees.filter(employee => id !== employee.id)
-            setEmployees(del);
-            setSearchedEmployees(del)
-        })
-        });   
+        if (id instanceof Array) {
+            id.forEach(id => {
+                axios.delete(`${URL}/${id}`).then(res => {
+                    const del = employees.filter(employee => id !== employee.id)
+                    setEmployees(del);
+                    setSearchedEmployees(del)
+                })
+            });
         }
-        else{
+        else {
             axios.delete(`${URL}/${id}`).then(res => {
                 const del = employees.filter(employee => id !== employee.id)
                 setEmployees(del);
@@ -121,8 +113,8 @@ export const Table = () => {
             weight: 90,
             age: 25,
             profile_photo: " ",
-            isAdmin: true,
-            isCoach: false,
+            isAdmin: false,
+            isCoach: true,
             isAthlete: false,
             clubs: editedClubs
         }
@@ -138,7 +130,7 @@ export const Table = () => {
         })
     }
     const renderHeader = () => {
-        let headerElement = [<input onChange={()=>selectAllCoaches('.checkbox-all')} className="checkbox-all" type="checkbox" ></input>, 'First & Last Name', 'Email adress', 'Owned clubs', 'Actions']
+        let headerElement = [<input onChange={() => selectAllCoaches('.checkbox-all')} className="checkbox-all" type="checkbox" ></input>, 'First & Last Name', 'Email adress', 'Owned clubs', 'Actions']
 
         return headerElement.map((key, index) => {
             return <th key={index}>{key}</th>
@@ -155,45 +147,43 @@ export const Table = () => {
     }
     const coachToBeDeleted = () => {
         const allCoach = document.querySelectorAll('.checkbox-coach');
-        const btnDel1= document.getElementById('btnDel1');
+        const btnDel1 = document.getElementById('btnDel1');
         let selectedCoachId = [];
-        allCoach.forEach(coach => {if(coach.checked){selectedCoachId.push(coach.id)}  });
-        if(selectedCoachId.length>=1) {
-            btnDel1.style.display="inline-flex";
+        allCoach.forEach(coach => { if (coach.checked) { selectedCoachId.push(coach.id) } });
+        if (selectedCoachId.length >= 1) {
+            btnDel1.style.display = "inline-flex";
         }
-        else
-        {
-            btnDel1.style.display="none";
+        else {
+            btnDel1.style.display = "none";
         }
         setEmployeeToDelete(selectedCoachId);
     }
-    const selectAllCoaches = (classInputAll) =>{
+    const selectAllCoaches = (classInputAll) => {
         const stateCheckboxAll = document.querySelector(classInputAll);
         const allCoach = document.querySelectorAll('.checkbox-coach');
-        const btnDel1= document.getElementById('btnDel1');
+        const btnDel1 = document.getElementById('btnDel1');
         let selectedCoachId = [];
-        if(stateCheckboxAll.checked){  
-            allCoach.forEach(coach => { coach.checked=true;});
+        if (stateCheckboxAll.checked) {
+            allCoach.forEach(coach => { coach.checked = true; });
 
-            btnDel1.style.display="inline-flex";
-            allCoach.forEach(coach => {if(coach.checked){selectedCoachId.push(coach.id);}});
+            btnDel1.style.display = "inline-flex";
+            allCoach.forEach(coach => { if (coach.checked) { selectedCoachId.push(coach.id); } });
             setEmployeeToDelete(selectedCoachId);
         }
-        else if(stateCheckboxAll.checked==false)
-        {
-            allCoach.forEach(coach => { coach.checked=false;});
-            btnDel1.style.display="none";
-            allCoach.forEach(coach => {if(coach.checked){selectedCoachId.pop(coach.id)}});
+        else if (stateCheckboxAll.checked == false) {
+            allCoach.forEach(coach => { coach.checked = false; });
+            btnDel1.style.display = "none";
+            allCoach.forEach(coach => { if (coach.checked) { selectedCoachId.pop(coach.id) } });
             setEmployeeToDelete(selectedCoachId);
         }
-         setEmployeeToDelete(selectedCoachId); 
+        setEmployeeToDelete(selectedCoachId);
     }
     return (
         <Fragment>
             <div id="btn-input">
                 <input id="searchInput" onChange={(e) => { search(e) }}></input>
                 <button id='btnAdd1' onClick={() => { handleShowEA("Add"); setType("add"); }}>Add new</button>
-                <button id='btnDel1' display="none"  className="btn-danger" onClick={() => {handleShowDel(employeeToDelete);}}>Delete</button>
+                <button id='btnDel1' display="none" className="btn-danger" onClick={() => { handleShowDel(employeeToDelete); }}>Delete</button>
             </div>
             <table id="coaches">
                 <thead>
@@ -201,31 +191,30 @@ export const Table = () => {
                 </thead>
                 <tbody>
                     {currentPost && currentPost.map((employee) => {
-                        if(employee.isAdmin===false)
-                        return (
+                        if (employee.isAdmin === false)
+                            return (
 
-                            <tr key={employee.id}>
-                                <td className='selected'>
-                                    <input onChange={coachToBeDeleted} id={employee.id} className="checkbox-coach" type="checkbox" ></input>
-                                {/* <p>{employee.id}</p> */}
-                                </td>
-                                <td>{employee.name}</td>
-                                <td>{employee.email}</td>
-                                <td>{employee.clubs +", "}</td>
-                                <td className='actions'>
-                                    <button id="btnEdit" onClick={() => { handleShowEA("Edit", employee); setType("edit"); }}><div id="edit-icon"></div></button>
-                                    <button id="btnDelete" onClick={() => { handleCloseEA(); handleShowDel(employee) }}><div id="delete-icon"></div></button>
-                                </td>
-                            </tr>
-                        )
+                                <tr key={employee.id}>
+                                    <td className='selected'>
+                                        <input onChange={coachToBeDeleted} id={employee.id} className="checkbox-coach" type="checkbox" ></input>
+                                    </td>
+                                    <td>{employee.name}</td>
+                                    <td>{employee.email}</td>
+                                    <td>{employee.clubs + ", "}</td>
+                                    <td className='actions'>
+                                        <button id="btnEdit" onClick={() => { handleShowEA("Edit", employee); setType("edit"); }}><div id="edit-icon"></div></button>
+                                        <button id="btnDelete" onClick={() => { handleCloseEA(); handleShowDel(employee) }}><div id="delete-icon"></div></button>
+                                    </td>
+                                </tr>
+                            )
                     })
                     }
                 </tbody>
             </table>
-            <Pagination 
-            postsPerPage={postsPerPage} 
-            totalPosts={searchedEmployees.length} 
-            paginate={paginate}
+            <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={searchedEmployees.length}
+                paginate={paginate}
             />
             <Modal show={showEA} onHide={handleCloseEA} animation={false}>
                 <Modal.Header closeButton>
@@ -264,7 +253,7 @@ export const Table = () => {
                 </Modal.Header>
                 <Modal.Body>
 
-                    <FormConfirmAdd name={name} clubs={showEditedClubs}/>
+                    <FormConfirmAdd name={name} clubs={showEditedClubs} />
 
                 </Modal.Body>
                 <Modal.Footer>
